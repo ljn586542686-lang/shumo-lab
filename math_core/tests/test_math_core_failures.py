@@ -6,8 +6,7 @@ import unittest
 from pathlib import Path
 
 from math_core.registry import run_model
-from run_case import run_case
-from x5_surgical_utils import ROOT
+from pipeline_core.tests.runner_workspace import RunnerWorkspaceTestCase
 
 
 def _snapshot_files(path: Path) -> dict[str, tuple[int, int]]:
@@ -16,7 +15,7 @@ def _snapshot_files(path: Path) -> dict[str, tuple[int, int]]:
     return {str(item.relative_to(path)): (item.stat().st_size, item.stat().st_mtime_ns) for item in path.rglob("*") if item.is_file()}
 
 
-class MathCoreFailureTests(unittest.TestCase):
+class MathCoreFailureTests(RunnerWorkspaceTestCase):
     def test_lp_infeasible_or_unsupported(self) -> None:
         result = run_model(
             {
@@ -78,9 +77,9 @@ class MathCoreFailureTests(unittest.TestCase):
         self.assertGreater(result["fatal_count"], 0)
 
     def test_math_core_fatal_no_promotion_and_safety(self) -> None:
-        archive_before = _snapshot_files(ROOT / "archive")
-        cases_before = _snapshot_files(ROOT / "cases")
-        case_dir = ROOT / "work_tmp" / "math_core_runner_failure_fixture"
+        archive_before = _snapshot_files(self.root / "archive")
+        cases_before = _snapshot_files(self.root / "cases")
+        case_dir = self.root / "work_tmp" / "math_core_runner_failure_fixture"
         if case_dir.exists():
             shutil.rmtree(case_dir)
         (case_dir / "data" / "raw").mkdir(parents=True)
@@ -113,17 +112,17 @@ class MathCoreFailureTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        result = run_case("run", case_dir, 30)
+        result = self.run_case("run", case_dir, 30)
         self.assertEqual(result["status"], "fatal")
         promoted = json.loads((case_dir / "output" / "result_summary.json").read_text(encoding="utf-8"))
         self.assertEqual(promoted["run_id"], "previous_good")
-        run_dir = ROOT / result["run_dir"]
+        run_dir = self.root / result["run_dir"]
         self.assertTrue((run_dir / "output" / "result_summary.json").exists())
         risk_summary = json.loads((run_dir / "risk_summary.json").read_text(encoding="utf-8"))
         self.assertGreater(risk_summary["fatal_count"], 0)
-        self.assertFalse((ROOT / "final_submit").exists())
-        self.assertEqual(archive_before, _snapshot_files(ROOT / "archive"))
-        self.assertEqual(cases_before, _snapshot_files(ROOT / "cases"))
+        self.assertFalse((self.root / "final_submit").exists())
+        self.assertEqual(archive_before, _snapshot_files(self.root / "archive"))
+        self.assertEqual(cases_before, _snapshot_files(self.root / "cases"))
 
 
 if __name__ == "__main__":

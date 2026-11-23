@@ -6,16 +6,15 @@ import unittest
 from pathlib import Path
 
 from quality_gates import run_quality_gates
-from run_case import run_case
-from x5_surgical_utils import ROOT
+from pipeline_core.tests.runner_workspace import RunnerWorkspaceTestCase
 
 
-FIXTURES = ROOT / "quality_gates" / "tests" / "fixtures"
+FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
 
-def _copy_fixture(name: str, target_name: str) -> Path:
+def _copy_fixture(root: Path, name: str, target_name: str) -> Path:
     src = FIXTURES / name
-    dst = ROOT / "work_tmp" / target_name
+    dst = root / "work_tmp" / target_name
     if dst.exists():
         shutil.rmtree(dst)
     shutil.copytree(src, dst)
@@ -29,13 +28,13 @@ def _rule(report: dict, rule_id: str) -> dict:
     raise AssertionError(f"rule not found: {rule_id}")
 
 
-class RealArtifactQualityGateTests(unittest.TestCase):
+class RealArtifactQualityGateTests(RunnerWorkspaceTestCase):
     def test_real_artifact_fixture_exercises_paper_figure_ref_and_abstract(self) -> None:
-        case_dir = _copy_fixture("real_artifact_case", "real_artifact_case_runtime")
-        run_dir = ROOT / "work_tmp" / "real_artifact_case_run"
+        case_dir = _copy_fixture(self.root, "real_artifact_case", "real_artifact_case_runtime")
+        run_dir = self.root / "work_tmp" / "real_artifact_case_run"
         if run_dir.exists():
             shutil.rmtree(run_dir)
-        report = run_quality_gates(case_dir=case_dir, run_dir=run_dir, run_id="real_artifact_qg_run")
+        report = run_quality_gates(root=self.root, case_dir=case_dir, run_dir=run_dir, run_id="real_artifact_qg_run")
         self.assertTrue(report["promotion_allowed"])
         self.assertEqual(report["hard_block_count"], 0)
 
@@ -65,19 +64,19 @@ class RealArtifactQualityGateTests(unittest.TestCase):
             self.assertIn(rule_id, rule_ids)
 
     def test_emergency_export_still_does_not_create_final_submit(self) -> None:
-        case_dir = _copy_fixture("real_artifact_case", "real_artifact_emergency_case")
-        result = run_case("emergency-export", case_dir, 30)
+        case_dir = _copy_fixture(self.root, "real_artifact_case", "real_artifact_emergency_case")
+        result = self.run_case("emergency-export", case_dir, 30)
         self.assertEqual(result["stage"], "emergency-export")
         self.assertFalse(result["final_submit_created"])
-        self.assertFalse((ROOT / "final_submit").exists())
+        self.assertFalse((self.root / "final_submit").exists())
 
     def test_hard_block_still_does_not_promote(self) -> None:
-        case_dir = _copy_fixture("qg_fail_case", "real_artifact_hard_block_case")
-        result = run_case("validate", case_dir, 30)
+        case_dir = _copy_fixture(self.root, "qg_fail_case", "real_artifact_hard_block_case")
+        result = self.run_case("validate", case_dir, 30)
         self.assertEqual(result["status"], "fatal")
         self.assertFalse(result["final_submit_created"])
         self.assertFalse((case_dir / "output" / "quality" / "qg_report.json").exists())
-        run_dir = ROOT / result["run_dir"]
+        run_dir = self.root / result["run_dir"]
         self.assertTrue((run_dir / "output" / "quality" / "qg_report.json").exists())
 
 

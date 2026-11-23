@@ -6,9 +6,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from run_case import run_case
+from pipeline_core.tests.runner_workspace import RunnerWorkspaceTestCase
 from validation.risk_policy import HARD_ASSERTION_NAMES, HUMAN_REVIEW_ITEMS, SOFT_WARNING_NAMES, validation_status
-from x5_surgical_utils import ROOT
 
 
 def _snapshot_files(path: Path) -> dict[str, tuple[int, int]]:
@@ -17,7 +16,7 @@ def _snapshot_files(path: Path) -> dict[str, tuple[int, int]]:
     return {str(item.relative_to(path)): (item.stat().st_size, item.stat().st_mtime_ns) for item in path.rglob("*") if item.is_file()}
 
 
-class RiskPolicyAndRunnerTests(unittest.TestCase):
+class RiskPolicyAndRunnerTests(RunnerWorkspaceTestCase):
     def test_policy_status(self) -> None:
         self.assertEqual(validation_status(0, 0), "PASS")
         self.assertEqual(validation_status(0, 1), "PASS_WITH_WARNING")
@@ -27,7 +26,7 @@ class RiskPolicyAndRunnerTests(unittest.TestCase):
         self.assertTrue(HUMAN_REVIEW_ITEMS)
 
     def test_validation_warning_does_not_block_promotion(self) -> None:
-        case_dir = ROOT / "work_tmp" / "f2_warning_promotion_fixture"
+        case_dir = self.root / "work_tmp" / "f2_warning_promotion_fixture"
         if case_dir.exists():
             shutil.rmtree(case_dir)
         (case_dir / "data" / "raw").mkdir(parents=True)
@@ -45,18 +44,18 @@ class RiskPolicyAndRunnerTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        result = run_case("run", case_dir, 30)
+        result = self.run_case("run", case_dir, 30)
         self.assertEqual(result["status"], "ok")
         self.assertTrue((case_dir / "output" / "result_summary.json").exists())
-        run_dir = ROOT / result["run_dir"]
+        run_dir = self.root / result["run_dir"]
         report = json.loads((run_dir / "validation_report.json").read_text(encoding="utf-8"))
         self.assertGreaterEqual(report["warning_count"], 1)
         self.assertEqual(report["fatal_count"], 0)
 
     def test_validation_fatal_blocks_promotion_and_safety(self) -> None:
-        archive_before = _snapshot_files(ROOT / "archive")
-        cases_before = _snapshot_files(ROOT / "cases")
-        case_dir = ROOT / "work_tmp" / "f2_fatal_no_promotion_fixture"
+        archive_before = _snapshot_files(self.root / "archive")
+        cases_before = _snapshot_files(self.root / "cases")
+        case_dir = self.root / "work_tmp" / "f2_fatal_no_promotion_fixture"
         if case_dir.exists():
             shutil.rmtree(case_dir)
         (case_dir / "data" / "raw").mkdir(parents=True)
@@ -88,30 +87,30 @@ class RiskPolicyAndRunnerTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        result = run_case("run", case_dir, 30)
+        result = self.run_case("run", case_dir, 30)
         self.assertEqual(result["status"], "fatal")
         promoted = json.loads((case_dir / "output" / "result_summary.json").read_text(encoding="utf-8"))
         self.assertEqual(promoted["run_id"], "previous_good")
-        run_dir = ROOT / result["run_dir"]
+        run_dir = self.root / result["run_dir"]
         self.assertTrue((run_dir / "validation_report.json").exists())
-        self.assertFalse((ROOT / "final_submit").exists())
-        self.assertEqual(archive_before, _snapshot_files(ROOT / "archive"))
-        self.assertEqual(cases_before, _snapshot_files(ROOT / "cases"))
+        self.assertFalse((self.root / "final_submit").exists())
+        self.assertEqual(archive_before, _snapshot_files(self.root / "archive"))
+        self.assertEqual(cases_before, _snapshot_files(self.root / "cases"))
 
     def test_no_model_config_f0_old_path_still_passes(self) -> None:
         # 该 F0 兼容性测试原先依赖仓库外的历史 work_tmp 快照；冻结清理后
         # 快照不再保证存在，因此在测试内建立最小、可重复的旧路径夹具。
-        (ROOT / "work_tmp").mkdir(parents=True, exist_ok=True)
-        with tempfile.TemporaryDirectory(prefix="fixture_success_", dir=ROOT / "work_tmp") as directory:
+        (self.root / "work_tmp").mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix="fixture_success_", dir=self.root / "work_tmp") as directory:
             case_dir = Path(directory)
             (case_dir / "data" / "raw").mkdir(parents=True)
             (case_dir / "data" / "raw" / "sample.csv").write_text("ok\n1\n", encoding="utf-8")
             (case_dir / "case_config.json").write_text(
                 json.dumps({"case_id": "fixture_success"}), encoding="utf-8"
             )
-            result = run_case("run", case_dir, 30)
+            result = self.run_case("run", case_dir, 30)
             self.assertEqual(result["status"], "ok")
-        self.assertFalse((ROOT / "final_submit").exists())
+        self.assertFalse((self.root / "final_submit").exists())
 
 
 if __name__ == "__main__":

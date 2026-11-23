@@ -1,20 +1,18 @@
 from __future__ import annotations
 
 import json
-import shutil
+import tempfile
 import unittest
 from pathlib import Path
 
 from validation.result_summary_adapter import adapt_result_summary, detect_legacy_schema
 from validation.unified_validation_report import write_unified_validation_report
-from x5_surgical_utils import ROOT
 
 
 class ResultSummaryAdapterTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.case_dir = ROOT / "work_tmp" / "adapter_legacy_case"
-        if self.case_dir.exists():
-            shutil.rmtree(self.case_dir)
+        self.workspace = Path(self.enterContext(tempfile.TemporaryDirectory()))
+        self.case_dir = self.workspace / "adapter_legacy_case"
         (self.case_dir / "output" / "tables").mkdir(parents=True)
         (self.case_dir / "output" / "tables" / "top.csv").write_text("id,score\nS229,0.93\n", encoding="utf-8")
         self.source_path = self.case_dir / "output" / "result_summary.json"
@@ -45,9 +43,7 @@ class ResultSummaryAdapterTests(unittest.TestCase):
 
     def test_adapter_writes_adapted_copy_without_modifying_source(self) -> None:
         source_before = self.source_path.read_text(encoding="utf-8")
-        output_dir = ROOT / "work_tmp" / "adapter_legacy_run"
-        if output_dir.exists():
-            shutil.rmtree(output_dir)
+        output_dir = self.workspace / "adapter_legacy_run"
         report = adapt_result_summary(self.source_path, output_dir, synthetic_run_id="synthetic_adapter_run")
         adapted_path = output_dir / "adapted_result_summary.json"
         self.assertTrue(adapted_path.exists())
@@ -65,9 +61,7 @@ class ResultSummaryAdapterTests(unittest.TestCase):
         self.assertTrue(report["validation_continue_allowed"])
 
     def test_adapted_summary_allows_unified_validation_to_continue(self) -> None:
-        output_dir = ROOT / "work_tmp" / "adapter_unified_run"
-        if output_dir.exists():
-            shutil.rmtree(output_dir)
+        output_dir = self.workspace / "adapter_unified_run"
         adapt_result_summary(self.source_path, output_dir, synthetic_run_id="synthetic_adapter_run")
         unified = write_unified_validation_report(output_dir, output_dir / "adapted_result_summary.json")
         self.assertEqual(unified["counts"]["hard_fatal"], 0)
@@ -76,9 +70,7 @@ class ResultSummaryAdapterTests(unittest.TestCase):
         self.assertIn(unified["validation_status"], {"PASS", "PASS_WITH_WARNING"})
 
     def test_unreadable_source_remains_fatal(self) -> None:
-        output_dir = ROOT / "work_tmp" / "adapter_missing_run"
-        if output_dir.exists():
-            shutil.rmtree(output_dir)
+        output_dir = self.workspace / "adapter_missing_run"
         report = adapt_result_summary(self.case_dir / "output" / "missing_result_summary.json", output_dir)
         adapted = json.loads((output_dir / "adapted_result_summary.json").read_text(encoding="utf-8"))
         self.assertFalse(report["validation_continue_allowed"])

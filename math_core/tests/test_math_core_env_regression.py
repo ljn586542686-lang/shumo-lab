@@ -4,11 +4,9 @@ import json
 import math
 import shutil
 import unittest
-from pathlib import Path
 
 from math_core.registry import run_model
-from run_case import run_case
-from x5_surgical_utils import ROOT
+from pipeline_core.tests.runner_workspace import RunnerWorkspaceTestCase
 
 
 def _contains_nan_inf(value: object) -> bool:
@@ -21,7 +19,7 @@ def _contains_nan_inf(value: object) -> bool:
     return False
 
 
-class MathCoreEnvRegressionTests(unittest.TestCase):
+class MathCoreEnvRegressionTests(RunnerWorkspaceTestCase):
     def test_numpy_and_scipy_available(self) -> None:
         import numpy
         import scipy
@@ -106,7 +104,7 @@ class MathCoreEnvRegressionTests(unittest.TestCase):
         self.assertFalse(_contains_nan_inf(graph))
 
     def test_math_core_fatal_still_no_promotion(self) -> None:
-        case_dir = ROOT / "work_tmp" / "math_core_env_failure_fixture"
+        case_dir = self.root / "work_tmp" / "math_core_env_failure_fixture"
         if case_dir.exists():
             shutil.rmtree(case_dir)
         (case_dir / "data" / "raw").mkdir(parents=True)
@@ -138,15 +136,15 @@ class MathCoreEnvRegressionTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        result = run_case("run", case_dir, 30)
+        result = self.run_case("run", case_dir, 30)
         self.assertEqual(result["status"], "fatal")
         promoted = json.loads((case_dir / "output" / "result_summary.json").read_text(encoding="utf-8"))
         self.assertEqual(promoted["run_id"], "previous_good")
-        run_dir = ROOT / result["run_dir"]
+        run_dir = self.root / result["run_dir"]
         run_summary = json.loads((run_dir / "output" / "result_summary.json").read_text(encoding="utf-8"))
         self.assertEqual(run_summary["failure_reason"], "infeasible")
         self.assertFalse(_contains_nan_inf(run_summary))
-        self.assertFalse((ROOT / "final_submit").exists())
+        self.assertFalse((self.root / "final_submit").exists())
 
 
 if __name__ == "__main__":

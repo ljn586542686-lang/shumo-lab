@@ -1,16 +1,19 @@
 from __future__ import annotations
 
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
 from validation.comparison import compare_result_summaries, write_model_comparison
-from x5_surgical_utils import ROOT
 
 
 class ModelComparisonTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.workspace = Path(self.enterContext(tempfile.TemporaryDirectory()))
+
     def _write_summary(self, name: str, payload: dict) -> Path:
-        base = ROOT / "work_tmp" / "comparison_inputs"
+        base = self.workspace / "comparison_inputs"
         base.mkdir(parents=True, exist_ok=True)
         path = base / f"{name}.json"
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -94,7 +97,7 @@ class ModelComparisonTests(unittest.TestCase):
                 "primary_results": {"shortest_distance": 3.0, "path": ["A", "B"]},
             },
         )
-        out_dir = ROOT / "work_tmp" / "comparison_output"
+        out_dir = self.workspace / "comparison_output"
         report = write_model_comparison([path], out_dir)
         self.assertEqual(report["best_candidate"], "comparison_write")
         self.assertTrue((out_dir / "model_comparison.json").exists())

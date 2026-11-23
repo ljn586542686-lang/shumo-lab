@@ -5,9 +5,8 @@ import shutil
 import unittest
 from pathlib import Path
 
-from run_case import run_case
+from pipeline_core.tests.runner_workspace import RunnerWorkspaceTestCase
 from validation.unified_validation_report import write_unified_validation_report
-from x5_surgical_utils import ROOT
 
 
 def _snapshot_files(path: Path) -> dict[str, tuple[int, int]]:
@@ -16,8 +15,8 @@ def _snapshot_files(path: Path) -> dict[str, tuple[int, int]]:
     return {str(item.relative_to(path)): (item.stat().st_size, item.stat().st_mtime_ns) for item in path.rglob("*") if item.is_file()}
 
 
-def _base_case(case_name: str, *, model_config: dict | None = None) -> Path:
-    case_dir = ROOT / "work_tmp" / case_name
+def _base_case(root: Path, case_name: str, *, model_config: dict | None = None) -> Path:
+    case_dir = root / "work_tmp" / case_name
     if case_dir.exists():
         shutil.rmtree(case_dir)
     (case_dir / "data" / "raw").mkdir(parents=True)
@@ -28,9 +27,10 @@ def _base_case(case_name: str, *, model_config: dict | None = None) -> Path:
     return case_dir
 
 
-class F21EvidencePatchTests(unittest.TestCase):
+class F21EvidencePatchTests(RunnerWorkspaceTestCase):
     def test_success_fixture_generates_evidence_map_and_paper_human_review(self) -> None:
         case_dir = _base_case(
+            self.root,
             "f2_1_success_evidence_fixture",
             model_config={
                 "model_type": "forecasting.moving_average",
@@ -45,9 +45,9 @@ class F21EvidencePatchTests(unittest.TestCase):
             "The forecast value is 23.5 and the error rate is 4.2%.",
             encoding="utf-8",
         )
-        result = run_case("run", case_dir, 30)
+        result = self.run_case("run", case_dir, 30)
         self.assertEqual(result["status"], "ok")
-        run_dir = ROOT / result["run_dir"]
+        run_dir = self.root / result["run_dir"]
         evidence_path = run_dir / "evidence_map.json"
         self.assertTrue(evidence_path.exists())
         evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
@@ -56,7 +56,7 @@ class F21EvidencePatchTests(unittest.TestCase):
         self.assertTrue(first["sha256"])
         self.assertEqual(first["run_id"], result["run_id"])
         self.assertTrue(first["artifact_path"])
-        self.assertTrue((ROOT / "manifests" / "evidence_map.json").exists())
+        self.assertTrue((self.root / "manifests" / "evidence_map.json").exists())
 
         paper_candidates = json.loads((run_dir / "paper_number_candidates.json").read_text(encoding="utf-8"))
         self.assertGreaterEqual(paper_candidates["candidate_count"], 2)
@@ -68,7 +68,7 @@ class F21EvidencePatchTests(unittest.TestCase):
         self.assertIn("f2_1_unified_categories", validation_report)
 
     def test_nan_inf_triggers_hard_fatal(self) -> None:
-        run_dir = ROOT / "work_tmp" / "f2_1_nan_inf_run"
+        run_dir = self.root / "work_tmp" / "f2_1_nan_inf_run"
         if run_dir.exists():
             shutil.rmtree(run_dir)
         (run_dir / "output").mkdir(parents=True)
@@ -89,6 +89,7 @@ class F21EvidencePatchTests(unittest.TestCase):
 
     def test_fatal_run_keeps_previous_output_and_work_tmp_evidence_only(self) -> None:
         case_dir = _base_case(
+            self.root,
             "f2_1_fatal_no_promotion_fixture",
             model_config={
                 "model_type": "optimization.linear_program",
@@ -112,16 +113,16 @@ class F21EvidencePatchTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        result = run_case("run", case_dir, 30)
+        result = self.run_case("run", case_dir, 30)
         self.assertEqual(result["status"], "fatal")
         promoted = json.loads((case_dir / "output" / "result_summary.json").read_text(encoding="utf-8"))
         self.assertEqual(promoted["run_id"], "previous_good")
-        run_dir = ROOT / result["run_dir"]
+        run_dir = self.root / result["run_dir"]
         self.assertTrue((run_dir / "evidence_map.json").exists())
         self.assertFalse((case_dir / "output" / "evidence_map.json").exists())
 
     def test_candidate_and_emergency_do_not_create_final_submit(self) -> None:
-        case_dir = _base_case("f2_1_candidate_fixture")
+        case_dir = _base_case(self.root, "f2_1_candidate_fixture")
         (case_dir / "output").mkdir()
         (case_dir / "output" / "result_summary.json").write_text(
             json.dumps(
@@ -136,21 +137,21 @@ class F21EvidencePatchTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        package_result = run_case("package", case_dir, 30)
-        emergency_result = run_case("emergency-export", case_dir, 30)
+        package_result = self.run_case("package", case_dir, 30)
+        emergency_result = self.run_case("emergency-export", case_dir, 30)
         self.assertEqual(package_result["final_submit_created"], False)
         self.assertEqual(emergency_result["final_submit_created"], False)
-        self.assertFalse((ROOT / "final_submit").exists())
+        self.assertFalse((self.root / "final_submit").exists())
 
     def test_no_model_config_f0_old_path_still_passes_and_safety_boundaries(self) -> None:
-        archive_before = _snapshot_files(ROOT / "archive")
-        cases_before = _snapshot_files(ROOT / "cases")
-        case_dir = _base_case("f2_1_no_model_config_fixture")
-        result = run_case("run", case_dir, 30)
+        archive_before = _snapshot_files(self.root / "archive")
+        cases_before = _snapshot_files(self.root / "cases")
+        case_dir = _base_case(self.root, "f2_1_no_model_config_fixture")
+        result = self.run_case("run", case_dir, 30)
         self.assertEqual(result["status"], "ok")
-        self.assertFalse((ROOT / "final_submit").exists())
-        self.assertEqual(archive_before, _snapshot_files(ROOT / "archive"))
-        self.assertEqual(cases_before, _snapshot_files(ROOT / "cases"))
+        self.assertFalse((self.root / "final_submit").exists())
+        self.assertEqual(archive_before, _snapshot_files(self.root / "archive"))
+        self.assertEqual(cases_before, _snapshot_files(self.root / "cases"))
 
 
 if __name__ == "__main__":

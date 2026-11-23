@@ -2,16 +2,16 @@ from __future__ import annotations
 
 import json
 import shutil
+import tempfile
 import unittest
 from pathlib import Path
 
 from quality_gates import run_quality_gates
 from review.manual_review_audit import audit_manual_review
 from validation.evidence_tier import E4_ADVERSARIAL_NEAR_MISS, classify_qg_result
-from x5_surgical_utils import ROOT
 
 
-FIXTURE = ROOT / "quality_gates" / "tests" / "fixtures" / "near_miss_cases" / "disclosed_extrapolation_and_background_ref"
+FIXTURE = Path(__file__).resolve().parent / "fixtures" / "near_miss_cases" / "disclosed_extrapolation_and_background_ref"
 
 
 def _rule(report: dict, rule_id: str) -> dict:
@@ -23,14 +23,11 @@ def _rule(report: dict, rule_id: str) -> dict:
 
 class NearMissBenchmarkTests(unittest.TestCase):
     def test_near_miss_cases_do_not_escalate_disclosed_risks_to_hard_fail(self) -> None:
-        case_dir = ROOT / "work_tmp" / "near_miss_disclosed_runtime"
-        if case_dir.exists():
-            shutil.rmtree(case_dir)
+        workspace = Path(self.enterContext(tempfile.TemporaryDirectory()))
+        case_dir = workspace / "near_miss_disclosed_runtime"
         shutil.copytree(FIXTURE, case_dir)
-        run_dir = ROOT / "work_tmp" / "near_miss_disclosed_run"
-        if run_dir.exists():
-            shutil.rmtree(run_dir)
-        report = run_quality_gates(case_dir=case_dir, run_dir=run_dir, run_id="near_miss_disclosed_run")
+        run_dir = workspace / "near_miss_disclosed_run"
+        report = run_quality_gates(root=workspace, case_dir=case_dir, run_dir=run_dir, run_id="near_miss_disclosed_run")
         self.assertTrue(report["promotion_allowed"])
         self.assertEqual(report["hard_block_count"], 0)
         self.assertEqual(_rule(report, "QG-EXTRAP-02")["status"], "MANUAL_REVIEW_REQUIRED")

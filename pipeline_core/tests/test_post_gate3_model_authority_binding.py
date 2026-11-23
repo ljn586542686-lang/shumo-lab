@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import io
-import shutil
 import sys
 import tempfile
 import unittest
@@ -292,9 +291,9 @@ class PostGate3ModelAuthorityBindingTests(unittest.TestCase):
     def test_direct_run_case_with_require_false_blocks_before_run_model(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             case = self.make_case(Path(temp))
-            with patch("math_core.registry.run_model") as run_model, patch(
-                "run_case._update_compliance_queue", return_value={}
-            ):
+            with patch.object(run_case_module, "ROOT", Path(temp)), patch(
+                "math_core.registry.run_model"
+            ) as run_model, patch("run_case._update_compliance_queue", return_value={}):
                 result = run_case(
                     "run",
                     case,
@@ -304,21 +303,16 @@ class PostGate3ModelAuthorityBindingTests(unittest.TestCase):
             run_model.assert_not_called()
             self.assertEqual(result["status"], "fatal")
             self.assertEqual(result["exception"], "MODEL_REVIEW_REQUIRED")
-            shutil.rmtree(Path(result["run_dir"]), ignore_errors=True)
 
     def test_developer_cli_path_blocks_before_run_model(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             case = self.make_case(Path(temp))
             argv = ["run_case.py", "--mode", "developer", "--case-dir", str(case)]
-            work_tmp = run_case_module.ROOT / "work_tmp"
-            before = set(work_tmp.glob("run_*")) if work_tmp.is_dir() else set()
-            with patch.object(sys, "argv", argv), patch(
+            with patch.object(run_case_module, "ROOT", Path(temp)), patch.object(sys, "argv", argv), patch(
                 "math_core.registry.run_model"
             ) as run_model, patch("run_case._update_compliance_queue", return_value={}):
                 with redirect_stdout(io.StringIO()):
                     exit_code = run_case_module.main()
-            for created in set(work_tmp.glob("run_*")) - before:
-                shutil.rmtree(created, ignore_errors=True)
             run_model.assert_not_called()
             self.assertEqual(exit_code, 2)
 

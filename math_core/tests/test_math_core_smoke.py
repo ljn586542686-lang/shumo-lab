@@ -4,14 +4,12 @@ import importlib.util
 import json
 import shutil
 import unittest
-from pathlib import Path
 
 from math_core.registry import run_model
-from run_case import run_case
-from x5_surgical_utils import ROOT
+from pipeline_core.tests.runner_workspace import RunnerWorkspaceTestCase
 
 
-class MathCoreSmokeTests(unittest.TestCase):
+class MathCoreSmokeTests(RunnerWorkspaceTestCase):
     def test_lp_feasible_or_unsupported_without_scipy(self) -> None:
         result = run_model(
             {
@@ -75,7 +73,7 @@ class MathCoreSmokeTests(unittest.TestCase):
         self.assertEqual(result["primary_results"]["path"], ["A", "B", "C"])
 
     def test_runner_model_config_promotes_success(self) -> None:
-        case_dir = ROOT / "work_tmp" / "math_core_runner_success_fixture"
+        case_dir = self.root / "work_tmp" / "math_core_runner_success_fixture"
         if case_dir.exists():
             shutil.rmtree(case_dir)
         (case_dir / "data" / "raw").mkdir(parents=True)
@@ -97,11 +95,11 @@ class MathCoreSmokeTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        result = run_case("run", case_dir, 30)
+        result = self.run_case("run", case_dir, 30)
         self.assertEqual(result["status"], "ok")
         promoted = json.loads((case_dir / "output" / "result_summary.json").read_text(encoding="utf-8"))
         self.assertEqual(promoted["model_id"], "statistics.linear_regression")
-        self.assertFalse((ROOT / "final_submit").exists())
+        self.assertFalse((self.root / "final_submit").exists())
 
 
 if __name__ == "__main__":
