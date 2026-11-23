@@ -86,4 +86,4 @@ python -m pytest -q -rs -p no:cacheprovider pipeline_core/tests math_core/tests 
 
 ## 写在最后
 
-这套程序在比赛里帮我和队友核对过模型和计算结果，也帮我们拿到了省二等奖。
+这套程序在比赛里帮我和队友核对过模型和计算结果，并帮我们拿到了省级二等奖。
