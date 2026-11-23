@@ -1,0 +1,8 @@
+{
+  "expected_rule_ids": [
+    "QG-FIG-08",
+    "QG-REF-09",
+    "QG-ABST-10"
+  ],
+  "note": "Fixture expectation only; manual review items are not auto-approved."
+}

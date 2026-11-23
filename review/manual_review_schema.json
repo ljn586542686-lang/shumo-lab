@@ -1,0 +1,18 @@
+{
+  "schema_version": "x5_f4_1_manual_review_audit_schema_v1",
+  "required_fields": [
+    "rule_id",
+    "severity",
+    "status",
+    "message",
+    "repair_action",
+    "evidence_files"
+  ],
+  "manual_review_status_values": [
+    "OPEN",
+    "ACKNOWLEDGED",
+    "RESOLVED",
+    "NOT_APPLICABLE"
+  ],
+  "note": "Manual review items are not auto-approved by this schema."
+}

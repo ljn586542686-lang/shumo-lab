@@ -1,0 +1,23 @@
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import { createRequire } from "node:module";
+
+const DAYS=334, POS=144, BLOCKS=6, BLOCK_POS=24, ZERO=1e-7;
+const PLAN="计划购电量", ADJ="调整购电量", STORAGE="充放电量", EMERGENCY="紧急购电量";
+const HASH2=(process.env.Q4_2_TEMPLATE_SHA256 || "").toLowerCase();
+const HASH3=(process.env.Q4_3_TEMPLATE_SHA256 || "").toLowerCase();
+const BLOCK_LABELS=["0:00-4:00","4:00-8:00","8:00-12:00","12:00-16:00","16:00-20:00","20:00-24:00"];
+function art(){const r=createRequire(import.meta.url);try{return r("@oai/artifact-tool")}catch{const p=path.join(os.homedir(),".cache","codex-runtimes","codex-primary-runtime","dependencies","node","node_modules","__resolver__.js");return createRequire(p)("@oai/artifact-tool")}}
+async function sha(p){const c=await import("node:crypto");return c.createHash("sha256").update(await fs.readFile(p)).digest("hex")}
+function args(){const a={};for(let i=2;i<process.argv.length;i+=2)a[process.argv[i].slice(2)]=process.argv[i+1];return a}
+const excelDate=d=>new Date(`${d}T00:00:00Z`);
+const sum=a=>a.reduce((x,y)=>x+Number(y||0),0);
+function assertLedger(l){if(l?.status!=="PASS"||l.scope?.days!==DAYS||!Array.isArray(l.daily_results)||l.daily_results.length!==DAYS)throw Error("Q4_LEDGER_NOT_COMPLETE");for(const d of l.daily_results){if(d.day_scientific_validation?.status!=="PASS")throw Error(`Q4_DAILY_VALIDATION:${d.date}`);for(const f of ["plan_q0","final_effective_plan","charge","discharge","emergency"])if(!Array.isArray(d[f])||d[f].length!==POS)throw Error(`Q4_VECTOR:${d.date}:${f}`);if(!Array.isArray(d.soc_path)||d.soc_path.length!==145)throw Error(`Q4_SOC:${d.date}`)}}
+async function main(){const a=args();for(const k of ["template","ledger","output","mode"])if(!a[k])throw Error("ARG_MISSING");if(!["Q4-2","Q4-3"].includes(a.mode))throw Error("UNKNOWN_MODE");const expected=a.mode==="Q4-2"?HASH2:HASH3;if((await sha(a.template)).toLowerCase()!==expected)throw Error("TEMPLATE_HASH_MISMATCH");const l=JSON.parse(await fs.readFile(a.ledger,"utf8"));assertLedger(l);const {FileBlob,SpreadsheetFile}=art();const wb=await SpreadsheetFile.importXlsx(await FileBlob.load(a.template));const sheets=wb.worksheets.items.map(s=>s.name);if(a.mode==="Q4-2"&&sheets.length!==3)throw Error("SHEET_COUNT");if(a.mode==="Q4-3"&&sheets.length!==4)throw Error("SHEET_COUNT");
+ const writePlan=(name,field,cost)=>{const s=wb.worksheets.getItem(name);s.getRangeByIndexes(1,1,DAYS,POS).values=l.daily_results.map(d=>d[field].map(Number));s.getRangeByIndexes(1,145,DAYS,1).values=l.daily_results.map(d=>[sum(d[field])]);s.getRangeByIndexes(1,146,DAYS,1).values=l.daily_results.map(d=>[cost(d)]);};
+ writePlan(PLAN,"plan_q0",d=>Number(d.initial_plan_cost));if(a.mode==="Q4-3")writePlan(ADJ,"final_effective_plan",d=>Number(d.initial_plan_cost)+Number(d.adjustment_cost));
+ const st=wb.worksheets.getItem(STORAGE);const src=st.getRange("A2:F7");for(let i=0;i<DAYS;i++)st.getRangeByIndexes(1+i*BLOCKS,0,BLOCKS,6).copyFrom(src,"all");const rows=[];for(const d of l.daily_results){for(let b=0;b<BLOCKS;b++){const lo=b*BLOCK_POS,hi=lo+BLOCK_POS;rows.push([b===0?excelDate(d.date):null,BLOCK_LABELS[b],sum(d.charge.slice(lo,hi)),sum(d.discharge.slice(lo,hi)),b===0?new Date("1899-12-30T00:00:00Z"):b===1?"24:00":null,b===0?Number(d.soc_path[0]):b===1?Number(d.soc_path.at(-1)):null])}}st.getRangeByIndexes(1,0,rows.length,6).values=rows;for(let i=0;i<DAYS;i++){const r=1+i*BLOCKS;st.getRangeByIndexes(r,0,1,1).format.numberFormat="mm-dd-yy";st.getRangeByIndexes(r,4,1,1).format.numberFormat="h:mm";st.getRangeByIndexes(r+1,4,1,1).format.numberFormat="@"}
+ const em=wb.worksheets.getItem(EMERGENCY);const labels=wb.worksheets.getItem(PLAN).getRangeByIndexes(0,1,1,POS).values[0];const er=[];for(const d of l.daily_results){let first=true;d.emergency.forEach((v,i)=>{if(Number(v)>ZERO){er.push([first?excelDate(d.date):null,labels[i],Number(v)]);first=false}})};em.getRangeByIndexes(1,0,Math.max(10,er.length),3).clear({applyTo:"contents"});const es=em.getRange("A2:C2");for(let i=0;i<er.length;i++)em.getRangeByIndexes(1+i,0,1,3).copyFrom(es,"all");if(er.length)em.getRangeByIndexes(1,0,er.length,3).values=er;for(let i=0;i<er.length;i++)if(er[i][0]!==null)em.getRangeByIndexes(1+i,0,1,1).format.numberFormat="mm-dd-yy";
+ wb.recalculate();await fs.mkdir(path.dirname(a.output),{recursive:true});const out=await SpreadsheetFile.exportXlsx(wb);await out.save(a.output);console.log(JSON.stringify({status:"PASS",output:a.output,emergency_rows:er.length}));}
+main().catch(e=>{console.error(JSON.stringify({status:"FAIL",reason:String(e.message||e)}));process.exit(1)});

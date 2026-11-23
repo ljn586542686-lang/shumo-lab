@@ -1,0 +1,112 @@
+# templates/case_FEATURES.yaml
+#
+# 单题功能触发清单模板（FEATURES / capabilities manifest）。
+# 用途：记录一道题「应当触发」「有条件触发」「明确不需要触发」的功能项，
+# 并给出每个已触发项的证据路径，供 scripts/check_feature_triggers.py 校验。
+#
+# 本模板不涉及数学求解，不修改任何已有正文结果。
+# 填写时不得伪造 evidence_paths；缺失就写 SHOULD_BUT_MISSING 或留空并注明原因。
+# Namespace：ABST-10 仅用于摘要结构及摘要与正文/结果的一致性；
+# XVAL-10 用于独立交叉验证、第二方法验证、独立复算及 rerun/diff；
+# EQ-OPT 仅用于唯一性、退化、等价最优证据及多最优解枚举。
+
+case_id: ""              # 例如 "textbook_5th_ch4_problem13"
+problem_type: ""         # 例如 "goal_programming_lp" / "assignment" / "flow_shop" / "milp_selection"
+source_ref: ""           # 例如 git 分支名或路径，标注证据来源，便于跨分支审计追溯
+
+# required_features：本题默认必须触发的功能。
+# 每一项记录 status（SHOULD_AND_DONE / SHOULD_BUT_MISSING）与证据路径。
+required_features:
+  - feature_id: "FEATURES"
+    status: ""            # SHOULD_AND_DONE | SHOULD_BUT_MISSING
+    evidence_paths: []
+    reviewer_notes: ""
+
+  - feature_id: "DATA-01"
+    status: ""
+    evidence_paths: []
+    reviewer_notes: ""
+
+  - feature_id: "SYM-06"
+    status: ""
+    evidence_paths: []
+    reviewer_notes: ""
+
+  - feature_id: "UNIT-OBJ"
+    status: ""
+    evidence_paths: []
+    reviewer_notes: ""
+
+  - feature_id: "ABST-10"
+    # 摘要需包含问题、方法、结果、结论，并与 canonical result summary 或正文一致。
+    status: ""
+    evidence_paths: []
+    reviewer_notes: ""
+
+# conditional_features：是否触发取决于题目具体情况。
+# 若判定为不触发，status 填 NOT_REQUIRED_AND_SKIPPED，并在 skip_reason 写明理由；
+# 不允许静默跳过（skip_reason 不可为空）。
+conditional_features:
+  - feature_id: "SENS-03"
+    status: ""            # SHOULD_AND_DONE | SHOULD_BUT_MISSING | NOT_REQUIRED_AND_SKIPPED
+    evidence_paths: []
+    skip_reason: ""
+    reviewer_notes: ""
+
+  - feature_id: "CODE-APPENDIX"
+    status: ""
+    evidence_paths: []
+    skip_reason: ""
+    reviewer_notes: ""
+
+  - feature_id: "XVAL-10"
+    # 独立交叉验证、第二方法验证、独立复算、rerun/diff 或对抗性数值复核。
+    status: ""
+    evidence_paths: []
+    skip_reason: ""
+    reviewer_notes: ""
+
+  - feature_id: "EQ-OPT"
+    # 唯一性、退化、等价最优证据或多最优解枚举；不得用于摘要或一般交叉验证。
+    status: ""
+    evidence_paths: []
+    skip_reason: ""
+    reviewer_notes: ""
+
+  - feature_id: "EXTRAP-02"
+    status: ""
+    evidence_paths: []
+    skip_reason: ""
+    reviewer_notes: ""
+
+  - feature_id: "MODEL-05"
+    status: ""
+    evidence_paths: []
+    skip_reason: ""
+    reviewer_notes: ""
+
+  - feature_id: "MODEL-TOURNAMENT"
+    status: ""
+    evidence_paths: []
+    skip_reason: ""
+    reviewer_notes: ""
+
+  - feature_id: "DIRECTION-CHECK"
+    status: ""
+    evidence_paths: []
+    skip_reason: ""
+    reviewer_notes: ""
+
+# explicitly_not_required_features：明确判定「本题类型下此功能不适用」的功能项列表，
+# 用于和 conditional_features 中真正跳过的情况区分开（这里是结构性不适用，
+# 不是本题偶然未触发）。例如良置封闭 LP 题对 EXTRAP-02（越界外推）通常结构性不适用。
+explicitly_not_required_features: []
+
+# evidence_paths（题目级别汇总，可选）：指向本题报告、日志、代码的关键路径，
+# 便于 reviewer 快速定位而无需在每个 feature 条目重复。
+evidence_paths:
+  report: ""
+  solve_log: ""
+  code: []
+
+reviewer_notes: ""

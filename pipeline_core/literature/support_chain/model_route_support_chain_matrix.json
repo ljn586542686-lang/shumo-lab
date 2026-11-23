@@ -1,0 +1,1596 @@
+{
+  "status": "PASS_WITH_LIMITATION / LITERATURE_SUPPORT_CHAIN_READY",
+  "generated_at": "2026-06-17",
+  "final_submit_allowed": false,
+  "formal_references_generated": false,
+  "official_submission_mode_modified": false,
+  "support_layers": [
+    "textbook_concept_support",
+    "method_citation_support_placeholder_only",
+    "structure_sample_support",
+    "case_validation_support"
+  ],
+  "chains": [
+    {
+      "model_route": "statistics_analysis",
+      "aliases": [
+        "统计分析类",
+        "统计建模",
+        "原因分析"
+      ],
+      "baseline_models": [
+        "描述统计",
+        "分组对比",
+        "相关性分析",
+        "logistic baseline"
+      ],
+      "advanced_models": [
+        "广义线性模型",
+        "随机森林解释模型",
+        "因果推断候选但需额外假设"
+      ],
+      "textbook_or_knowledge_card_support": [
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/20_parameter_estimation.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/21_statistical_inference.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/22_data_fitting_and_regression.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/38_model_evaluation_and_validation.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/86_model_evaluation_cross_validation.md"
+      ],
+      "method_paper_placeholder_support": [
+        {
+          "asset_id": "LIT_0018",
+          "file_name": "STAT_053_LassoLogistic_糖尿病合并冠心病心肌细胞损伤_2026.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0019",
+          "file_name": "STAT_057_Logistic_ANN_血液透析低血压预测_2026.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0020",
+          "file_name": "STAT_141_LASSO回归_儿童龋齿预防效果预测_2026.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0021",
+          "file_name": "STAT_169_回归模型_LST癌变诊断价值_2026.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0022",
+          "file_name": "STAT_173_风险预测模型_食管癌术后复发系统评价_2026.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0023",
+          "file_name": "STAT_CLS_015_集成学习_信用卡欺诈检测_2024.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0024",
+          "file_name": "STAT_EVAL_024_不平衡数据_抽样方法_2023.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0025",
+          "file_name": "STAT_EVAL_059_ROC分析_多分类问题应用_2022.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        }
+      ],
+      "excellent_paper_structure_rule_support": [
+        "pipeline_core/paper_quality/rules/excellent_paper_statistical_evidence_chain_rules.md"
+      ],
+      "structure_sample_support": [
+        {
+          "asset_id": "LIT_0042",
+          "file_name": "EXC_STAT_2018C_RFMS会员画像数据挖掘.pdf",
+          "classification": "statistics",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0043",
+          "file_name": "EXC_STAT_2020C_中小微企业信贷决策分析.pdf",
+          "classification": "statistics",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0044",
+          "file_name": "EXC_STAT_2022C_C155_古代玻璃分类分析.pdf",
+          "classification": "statistics",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        }
+      ],
+      "validation_or_case_support": [
+        "case_03",
+        "case_04",
+        "active_competition_2017B_problem1"
+      ],
+      "citation_status": {
+        "method_papers": "placeholder_only_pending_manual_review",
+        "excellent_papers": "structure_sample_only_not_citation",
+        "formal_reference_allowed": false,
+        "citation_ready": false
+      },
+      "support_type_distinction": {
+        "method_citation_support": "method papers only; current state placeholder only; formal citation before manual metadata review is forbidden",
+        "structure_sample_support": "excellent papers only; structure and quality rules only; method citation forbidden",
+        "textbook_concept_support": "knowledge cards for concepts, terminology, model boundaries and routing",
+        "case_validation_support": "completed cases or active_competition outputs for production-line validation only, not literature citation"
+      },
+      "manual_review_required": true,
+      "human_gate_required": true,
+      "final_submit_allowed": false
+    },
+    {
+      "model_route": "prediction_timeseries",
+      "aliases": [
+        "预测时间序列类",
+        "动态预测",
+        "趋势预测"
+      ],
+      "baseline_models": [
+        "移动平均",
+        "指数平滑",
+        "ARIMA baseline"
+      ],
+      "advanced_models": [
+        "SARIMA",
+        "XGBoost baseline",
+        "状态空间模型",
+        "组合预测"
+      ],
+      "textbook_or_knowledge_card_support": [
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/23_time_series_prediction.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/53_arima_and_seasonal_timeseries.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/38_model_evaluation_and_validation.md"
+      ],
+      "method_paper_placeholder_support": [
+        {
+          "asset_id": "LIT_0001",
+          "file_name": "FB_EVAL_030_AHP_EWM_TOPSIS_GRA_绿色矿山建设水平评价_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0002",
+          "file_name": "FB_EVAL_081_熵权法_AHP_TOPSIS_水资源承载力评价_2025.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0003",
+          "file_name": "FB_GRAPH_014_概率最大覆盖_水上险情应急设施选址_2025.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0004",
+          "file_name": "FB_GRAPH_020_应急设施选址分配_不确定环境优化模型_2024.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0005",
+          "file_name": "FB_TS_013_ARIMA_空气质量指数预测_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0006",
+          "file_name": "FB_TS_048_ARIMA_电力系统用电负荷预测_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        }
+      ],
+      "excellent_paper_structure_rule_support": [
+        "pipeline_core/paper_quality/rules/problem_by_problem_narrative_upgrade_rules.md"
+      ],
+      "structure_sample_support": [
+        {
+          "asset_id": "LIT_0033",
+          "file_name": "EXC_FB_2011B_交巡警平台设置与调度.pdf",
+          "classification": "fallback",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0034",
+          "file_name": "EXC_FB_2020A_回焊炉温曲线优化控制.pdf",
+          "classification": "fallback",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        }
+      ],
+      "validation_or_case_support": [
+        "case_10_problem1_timeseries_supplier_scoring"
+      ],
+      "citation_status": {
+        "method_papers": "placeholder_only_pending_manual_review",
+        "excellent_papers": "structure_sample_only_not_citation",
+        "formal_reference_allowed": false,
+        "citation_ready": false
+      },
+      "support_type_distinction": {
+        "method_citation_support": "method papers only; current state placeholder only; formal citation before manual metadata review is forbidden",
+        "structure_sample_support": "excellent papers only; structure and quality rules only; method citation forbidden",
+        "textbook_concept_support": "knowledge cards for concepts, terminology, model boundaries and routing",
+        "case_validation_support": "completed cases or active_competition outputs for production-line validation only, not literature citation"
+      },
+      "manual_review_required": true,
+      "human_gate_required": true,
+      "final_submit_allowed": false
+    },
+    {
+      "model_route": "optimization_planning",
+      "aliases": [
+        "优化规划类",
+        "资源分配",
+        "方案优化"
+      ],
+      "baseline_models": [
+        "线性规划",
+        "规则型启发式",
+        "贪心 baseline"
+      ],
+      "advanced_models": [
+        "混合整数规划",
+        "非线性规划",
+        "遗传算法",
+        "多目标 Pareto 分析"
+      ],
+      "textbook_or_knowledge_card_support": [
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/03_linear_programming.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/12_integer_and_combinatorial_optimization.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/13_greedy_and_heuristic.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/15_multi_objective_optimization.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/57_modern_optimization_algorithm.md"
+      ],
+      "method_paper_placeholder_support": [
+        {
+          "asset_id": "LIT_0007",
+          "file_name": "OPT_DynamicOptimization_隧道施工进度计划_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0008",
+          "file_name": "OPT_InverseOptimization_成本计划不确定费率_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0009",
+          "file_name": "OPT_MILP_工期优化_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0010",
+          "file_name": "OPT_MultiObjective_钢铁水系统节水_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0011",
+          "file_name": "OPT_Robust_食药物资分配再分配_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0012",
+          "file_name": "OPT_Scheduling_山火任务调度资源配置_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0013",
+          "file_name": "OPT_Scheduling_高铁物流运力配置调度_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        }
+      ],
+      "excellent_paper_structure_rule_support": [
+        "pipeline_core/paper_quality/rules/excellent_paper_problem_progression_rules.md"
+      ],
+      "structure_sample_support": [
+        {
+          "asset_id": "LIT_0038",
+          "file_name": "EXC_OPT_2016D_风电场运行维护计划优化.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0039",
+          "file_name": "EXC_OPT_2018B_0-1规划_RGV动态调度.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0040",
+          "file_name": "EXC_OPT_2020B_穿越沙漠游戏最优策略.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        }
+      ],
+      "validation_or_case_support": [
+        "case_09_dynamic_rgv_baseline",
+        "active_competition_2017B_problem2"
+      ],
+      "citation_status": {
+        "method_papers": "placeholder_only_pending_manual_review",
+        "excellent_papers": "structure_sample_only_not_citation",
+        "formal_reference_allowed": false,
+        "citation_ready": false
+      },
+      "support_type_distinction": {
+        "method_citation_support": "method papers only; current state placeholder only; formal citation before manual metadata review is forbidden",
+        "structure_sample_support": "excellent papers only; structure and quality rules only; method citation forbidden",
+        "textbook_concept_support": "knowledge cards for concepts, terminology, model boundaries and routing",
+        "case_validation_support": "completed cases or active_competition outputs for production-line validation only, not literature citation"
+      },
+      "manual_review_required": true,
+      "human_gate_required": true,
+      "final_submit_allowed": false
+    },
+    {
+      "model_route": "evaluation_decision",
+      "aliases": [
+        "评价决策类",
+        "综合评价",
+        "排序选择"
+      ],
+      "baseline_models": [
+        "标准化综合评分",
+        "熵权法",
+        "TOPSIS baseline"
+      ],
+      "advanced_models": [
+        "AHP-TOPSIS 组合",
+        "灰色关联分析",
+        "PCA 综合评价"
+      ],
+      "textbook_or_knowledge_card_support": [
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/10_decision_theory.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/59_comprehensive_evaluation.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/38_model_evaluation_and_validation.md"
+      ],
+      "method_paper_placeholder_support": [
+        {
+          "asset_id": "LIT_0001",
+          "file_name": "FB_EVAL_030_AHP_EWM_TOPSIS_GRA_绿色矿山建设水平评价_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0002",
+          "file_name": "FB_EVAL_081_熵权法_AHP_TOPSIS_水资源承载力评价_2025.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0003",
+          "file_name": "FB_GRAPH_014_概率最大覆盖_水上险情应急设施选址_2025.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0004",
+          "file_name": "FB_GRAPH_020_应急设施选址分配_不确定环境优化模型_2024.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0005",
+          "file_name": "FB_TS_013_ARIMA_空气质量指数预测_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0006",
+          "file_name": "FB_TS_048_ARIMA_电力系统用电负荷预测_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        }
+      ],
+      "excellent_paper_structure_rule_support": [
+        "pipeline_core/paper_quality/rules/excellent_paper_statistical_evidence_chain_rules.md"
+      ],
+      "structure_sample_support": [
+        {
+          "asset_id": "LIT_0033",
+          "file_name": "EXC_FB_2011B_交巡警平台设置与调度.pdf",
+          "classification": "fallback",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0034",
+          "file_name": "EXC_FB_2020A_回焊炉温曲线优化控制.pdf",
+          "classification": "fallback",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        }
+      ],
+      "validation_or_case_support": [
+        "case_10_supplier_importance_scoring",
+        "case_04_glass_classification"
+      ],
+      "citation_status": {
+        "method_papers": "placeholder_only_pending_manual_review",
+        "excellent_papers": "structure_sample_only_not_citation",
+        "formal_reference_allowed": false,
+        "citation_ready": false
+      },
+      "support_type_distinction": {
+        "method_citation_support": "method papers only; current state placeholder only; formal citation before manual metadata review is forbidden",
+        "structure_sample_support": "excellent papers only; structure and quality rules only; method citation forbidden",
+        "textbook_concept_support": "knowledge cards for concepts, terminology, model boundaries and routing",
+        "case_validation_support": "completed cases or active_competition outputs for production-line validation only, not literature citation"
+      },
+      "manual_review_required": true,
+      "human_gate_required": true,
+      "final_submit_allowed": false
+    },
+    {
+      "model_route": "graph_network_spatial_coverage",
+      "aliases": [
+        "图网络类",
+        "空间覆盖类",
+        "设施选址"
+      ],
+      "baseline_models": [
+        "最短路覆盖 baseline",
+        "最近设施分配",
+        "空间距离统计"
+      ],
+      "advanced_models": [
+        "p-median",
+        "p-center",
+        "最大覆盖模型",
+        "网络流优化"
+      ],
+      "textbook_or_knowledge_card_support": [
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/11_network_flow.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/46_graph_shortest_path_model.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/28_motion_and_path_model.md"
+      ],
+      "method_paper_placeholder_support": [
+        {
+          "asset_id": "LIT_0001",
+          "file_name": "FB_EVAL_030_AHP_EWM_TOPSIS_GRA_绿色矿山建设水平评价_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0002",
+          "file_name": "FB_EVAL_081_熵权法_AHP_TOPSIS_水资源承载力评价_2025.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0003",
+          "file_name": "FB_GRAPH_014_概率最大覆盖_水上险情应急设施选址_2025.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0004",
+          "file_name": "FB_GRAPH_020_应急设施选址分配_不确定环境优化模型_2024.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0005",
+          "file_name": "FB_TS_013_ARIMA_空气质量指数预测_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0006",
+          "file_name": "FB_TS_048_ARIMA_电力系统用电负荷预测_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        }
+      ],
+      "excellent_paper_structure_rule_support": [
+        "pipeline_core/paper_quality/rules/excellent_paper_mechanism_fitting_optimization_rules.md",
+        "pipeline_core/paper_quality/rules/problem_by_problem_narrative_upgrade_rules.md"
+      ],
+      "structure_sample_support": [
+        {
+          "asset_id": "LIT_0033",
+          "file_name": "EXC_FB_2011B_交巡警平台设置与调度.pdf",
+          "classification": "fallback",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0034",
+          "file_name": "EXC_FB_2020A_回焊炉温曲线优化控制.pdf",
+          "classification": "fallback",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        }
+      ],
+      "validation_or_case_support": [
+        "case_11_minimal_coverage_model"
+      ],
+      "citation_status": {
+        "method_papers": "placeholder_only_pending_manual_review",
+        "excellent_papers": "structure_sample_only_not_citation",
+        "formal_reference_allowed": false,
+        "citation_ready": false
+      },
+      "support_type_distinction": {
+        "method_citation_support": "method papers only; current state placeholder only; formal citation before manual metadata review is forbidden",
+        "structure_sample_support": "excellent papers only; structure and quality rules only; method citation forbidden",
+        "textbook_concept_support": "knowledge cards for concepts, terminology, model boundaries and routing",
+        "case_validation_support": "completed cases or active_competition outputs for production-line validation only, not literature citation"
+      },
+      "manual_review_required": true,
+      "human_gate_required": true,
+      "final_submit_allowed": false
+    },
+    {
+      "model_route": "dynamic_scheduling",
+      "aliases": [
+        "动态调度类",
+        "离散事件仿真",
+        "排队调度"
+      ],
+      "baseline_models": [
+        "先到先服务",
+        "最近设备规则",
+        "固定优先级规则"
+      ],
+      "advanced_models": [
+        "滚动优化",
+        "遗传算法调度",
+        "仿真优化",
+        "多规则集成"
+      ],
+      "textbook_or_knowledge_card_support": [
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/07_dynamic_programming.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/13_greedy_and_heuristic.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/40_algorithm_arena.md"
+      ],
+      "method_paper_placeholder_support": [
+        {
+          "asset_id": "LIT_0007",
+          "file_name": "OPT_DynamicOptimization_隧道施工进度计划_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0008",
+          "file_name": "OPT_InverseOptimization_成本计划不确定费率_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0009",
+          "file_name": "OPT_MILP_工期优化_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0010",
+          "file_name": "OPT_MultiObjective_钢铁水系统节水_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0011",
+          "file_name": "OPT_Robust_食药物资分配再分配_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0012",
+          "file_name": "OPT_Scheduling_山火任务调度资源配置_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0013",
+          "file_name": "OPT_Scheduling_高铁物流运力配置调度_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        }
+      ],
+      "excellent_paper_structure_rule_support": [
+        "pipeline_core/paper_quality/rules/excellent_paper_problem_progression_rules.md"
+      ],
+      "structure_sample_support": [
+        {
+          "asset_id": "LIT_0038",
+          "file_name": "EXC_OPT_2016D_风电场运行维护计划优化.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0039",
+          "file_name": "EXC_OPT_2018B_0-1规划_RGV动态调度.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0040",
+          "file_name": "EXC_OPT_2020B_穿越沙漠游戏最优策略.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        }
+      ],
+      "validation_or_case_support": [
+        "case_09_dynamic_rgv_baseline"
+      ],
+      "citation_status": {
+        "method_papers": "placeholder_only_pending_manual_review",
+        "excellent_papers": "structure_sample_only_not_citation",
+        "formal_reference_allowed": false,
+        "citation_ready": false
+      },
+      "support_type_distinction": {
+        "method_citation_support": "method papers only; current state placeholder only; formal citation before manual metadata review is forbidden",
+        "structure_sample_support": "excellent papers only; structure and quality rules only; method citation forbidden",
+        "textbook_concept_support": "knowledge cards for concepts, terminology, model boundaries and routing",
+        "case_validation_support": "completed cases or active_competition outputs for production-line validation only, not literature citation"
+      },
+      "manual_review_required": true,
+      "human_gate_required": true,
+      "final_submit_allowed": false
+    },
+    {
+      "model_route": "mechanism_fitting",
+      "aliases": [
+        "机理拟合类",
+        "物理建模",
+        "曲线拟合"
+      ],
+      "baseline_models": [
+        "经验曲线拟合",
+        "最小二乘参数估计",
+        "残差分析"
+      ],
+      "advanced_models": [
+        "微分方程模型",
+        "非线性参数估计",
+        "物理约束优化"
+      ],
+      "textbook_or_knowledge_card_support": [
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/27_physical_mechanism_model.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/31_inverse_problem_and_parameter_identification.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/37_interpolation_and_curve_fitting.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/39_sensitivity_analysis.md"
+      ],
+      "method_paper_placeholder_support": [
+        {
+          "asset_id": "LIT_0001",
+          "file_name": "FB_EVAL_030_AHP_EWM_TOPSIS_GRA_绿色矿山建设水平评价_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0002",
+          "file_name": "FB_EVAL_081_熵权法_AHP_TOPSIS_水资源承载力评价_2025.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0003",
+          "file_name": "FB_GRAPH_014_概率最大覆盖_水上险情应急设施选址_2025.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0004",
+          "file_name": "FB_GRAPH_020_应急设施选址分配_不确定环境优化模型_2024.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0005",
+          "file_name": "FB_TS_013_ARIMA_空气质量指数预测_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0006",
+          "file_name": "FB_TS_048_ARIMA_电力系统用电负荷预测_2026.pdf",
+          "classification": "fallback",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0014",
+          "file_name": "MIX_029_两阶段预测_动态多目标优化算法_2026.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0015",
+          "file_name": "MIX_030_需求预测_电商物流库存优化_2026.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        }
+      ],
+      "excellent_paper_structure_rule_support": [
+        "pipeline_core/paper_quality/rules/excellent_paper_mechanism_fitting_optimization_rules.md"
+      ],
+      "structure_sample_support": [
+        {
+          "asset_id": "LIT_0033",
+          "file_name": "EXC_FB_2011B_交巡警平台设置与调度.pdf",
+          "classification": "fallback",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0034",
+          "file_name": "EXC_FB_2020A_回焊炉温曲线优化控制.pdf",
+          "classification": "fallback",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0035",
+          "file_name": "EXC_MIX_2015B_出租车资源配置.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0036",
+          "file_name": "EXC_MIX_2020C_中小微企业最优信贷决策.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0037",
+          "file_name": "EXC_MIX_2020C_决策树非线性规划_信贷风险与策略.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        }
+      ],
+      "validation_or_case_support": [
+        "case_05_partial_model_only"
+      ],
+      "citation_status": {
+        "method_papers": "placeholder_only_pending_manual_review",
+        "excellent_papers": "structure_sample_only_not_citation",
+        "formal_reference_allowed": false,
+        "citation_ready": false
+      },
+      "support_type_distinction": {
+        "method_citation_support": "method papers only; current state placeholder only; formal citation before manual metadata review is forbidden",
+        "structure_sample_support": "excellent papers only; structure and quality rules only; method citation forbidden",
+        "textbook_concept_support": "knowledge cards for concepts, terminology, model boundaries and routing",
+        "case_validation_support": "completed cases or active_competition outputs for production-line validation only, not literature citation"
+      },
+      "manual_review_required": true,
+      "human_gate_required": true,
+      "final_submit_allowed": false
+    },
+    {
+      "model_route": "classification_clustering",
+      "aliases": [
+        "分类聚类类",
+        "识别判别",
+        "分组分析"
+      ],
+      "baseline_models": [
+        "KMeans",
+        "层次聚类",
+        "决策树 baseline"
+      ],
+      "advanced_models": [
+        "随机森林",
+        "SVM",
+        "集成学习",
+        "聚类稳定性分析"
+      ],
+      "textbook_or_knowledge_card_support": [
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/85_supervised_learning_pipeline.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/86_model_evaluation_cross_validation.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/87_decision_tree.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/92_clustering_analysis_methods.md"
+      ],
+      "method_paper_placeholder_support": [
+        {
+          "asset_id": "LIT_0018",
+          "file_name": "STAT_053_LassoLogistic_糖尿病合并冠心病心肌细胞损伤_2026.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0019",
+          "file_name": "STAT_057_Logistic_ANN_血液透析低血压预测_2026.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0020",
+          "file_name": "STAT_141_LASSO回归_儿童龋齿预防效果预测_2026.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0021",
+          "file_name": "STAT_169_回归模型_LST癌变诊断价值_2026.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0022",
+          "file_name": "STAT_173_风险预测模型_食管癌术后复发系统评价_2026.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0023",
+          "file_name": "STAT_CLS_015_集成学习_信用卡欺诈检测_2024.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0024",
+          "file_name": "STAT_EVAL_024_不平衡数据_抽样方法_2023.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0025",
+          "file_name": "STAT_EVAL_059_ROC分析_多分类问题应用_2022.pdf",
+          "classification": "statistics",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        }
+      ],
+      "excellent_paper_structure_rule_support": [
+        "pipeline_core/paper_quality/rules/excellent_paper_statistical_evidence_chain_rules.md"
+      ],
+      "structure_sample_support": [
+        {
+          "asset_id": "LIT_0042",
+          "file_name": "EXC_STAT_2018C_RFMS会员画像数据挖掘.pdf",
+          "classification": "statistics",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0043",
+          "file_name": "EXC_STAT_2020C_中小微企业信贷决策分析.pdf",
+          "classification": "statistics",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0044",
+          "file_name": "EXC_STAT_2022C_C155_古代玻璃分类分析.pdf",
+          "classification": "statistics",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        }
+      ],
+      "validation_or_case_support": [
+        "case_04_glass_classification"
+      ],
+      "citation_status": {
+        "method_papers": "placeholder_only_pending_manual_review",
+        "excellent_papers": "structure_sample_only_not_citation",
+        "formal_reference_allowed": false,
+        "citation_ready": false
+      },
+      "support_type_distinction": {
+        "method_citation_support": "method papers only; current state placeholder only; formal citation before manual metadata review is forbidden",
+        "structure_sample_support": "excellent papers only; structure and quality rules only; method citation forbidden",
+        "textbook_concept_support": "knowledge cards for concepts, terminology, model boundaries and routing",
+        "case_validation_support": "completed cases or active_competition outputs for production-line validation only, not literature citation"
+      },
+      "manual_review_required": true,
+      "human_gate_required": true,
+      "final_submit_allowed": false
+    },
+    {
+      "model_route": "multi_objective_decision",
+      "aliases": [
+        "多目标决策类",
+        "权衡优化",
+        "折中方案"
+      ],
+      "baseline_models": [
+        "加权和 baseline",
+        "规则型折中方案"
+      ],
+      "advanced_models": [
+        "多目标遗传算法",
+        "ε 约束法",
+        "Pareto 前沿分析"
+      ],
+      "textbook_or_knowledge_card_support": [
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/15_multi_objective_optimization.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/61_goal_programming.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/68_perturbation_and_sensitivity.md"
+      ],
+      "method_paper_placeholder_support": [
+        {
+          "asset_id": "LIT_0007",
+          "file_name": "OPT_DynamicOptimization_隧道施工进度计划_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0008",
+          "file_name": "OPT_InverseOptimization_成本计划不确定费率_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0009",
+          "file_name": "OPT_MILP_工期优化_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0010",
+          "file_name": "OPT_MultiObjective_钢铁水系统节水_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0011",
+          "file_name": "OPT_Robust_食药物资分配再分配_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0012",
+          "file_name": "OPT_Scheduling_山火任务调度资源配置_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0013",
+          "file_name": "OPT_Scheduling_高铁物流运力配置调度_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0014",
+          "file_name": "MIX_029_两阶段预测_动态多目标优化算法_2026.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        }
+      ],
+      "excellent_paper_structure_rule_support": [
+        "pipeline_core/paper_quality/rules/excellent_paper_problem_progression_rules.md"
+      ],
+      "structure_sample_support": [
+        {
+          "asset_id": "LIT_0035",
+          "file_name": "EXC_MIX_2015B_出租车资源配置.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0036",
+          "file_name": "EXC_MIX_2020C_中小微企业最优信贷决策.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0037",
+          "file_name": "EXC_MIX_2020C_决策树非线性规划_信贷风险与策略.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0038",
+          "file_name": "EXC_OPT_2016D_风电场运行维护计划优化.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0039",
+          "file_name": "EXC_OPT_2018B_0-1规划_RGV动态调度.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0040",
+          "file_name": "EXC_OPT_2020B_穿越沙漠游戏最优策略.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        }
+      ],
+      "validation_or_case_support": [
+        "case_09",
+        "case_10_problem1_only"
+      ],
+      "citation_status": {
+        "method_papers": "placeholder_only_pending_manual_review",
+        "excellent_papers": "structure_sample_only_not_citation",
+        "formal_reference_allowed": false,
+        "citation_ready": false
+      },
+      "support_type_distinction": {
+        "method_citation_support": "method papers only; current state placeholder only; formal citation before manual metadata review is forbidden",
+        "structure_sample_support": "excellent papers only; structure and quality rules only; method citation forbidden",
+        "textbook_concept_support": "knowledge cards for concepts, terminology, model boundaries and routing",
+        "case_validation_support": "completed cases or active_competition outputs for production-line validation only, not literature citation"
+      },
+      "manual_review_required": true,
+      "human_gate_required": true,
+      "final_submit_allowed": false
+    },
+    {
+      "model_route": "mixed_problem",
+      "aliases": [
+        "混合型问题",
+        "多阶段问题",
+        "组合建模"
+      ],
+      "baseline_models": [
+        "先完成最小子问题闭环",
+        "分阶段 baseline"
+      ],
+      "advanced_models": [
+        "多模型集成",
+        "预测加优化",
+        "评价加调度",
+        "空间聚类加优化"
+      ],
+      "textbook_or_knowledge_card_support": [
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/02_problem_type_router.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/40_algorithm_arena.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/41_evidence_chain_and_citation.md",
+        "pipeline_core/literature_library/knowledge_cards/core_competition_cards/86_model_evaluation_cross_validation.md"
+      ],
+      "method_paper_placeholder_support": [
+        {
+          "asset_id": "LIT_0007",
+          "file_name": "OPT_DynamicOptimization_隧道施工进度计划_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0008",
+          "file_name": "OPT_InverseOptimization_成本计划不确定费率_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0009",
+          "file_name": "OPT_MILP_工期优化_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0010",
+          "file_name": "OPT_MultiObjective_钢铁水系统节水_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0011",
+          "file_name": "OPT_Robust_食药物资分配再分配_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0012",
+          "file_name": "OPT_Scheduling_山火任务调度资源配置_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0013",
+          "file_name": "OPT_Scheduling_高铁物流运力配置调度_2025.pdf",
+          "classification": "optimization",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0014",
+          "file_name": "MIX_029_两阶段预测_动态多目标优化算法_2026.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "method_placeholder_candidate",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": true,
+          "manual_review_required": true
+        }
+      ],
+      "excellent_paper_structure_rule_support": [
+        "pipeline_core/paper_quality/rules/excellent_paper_stat_opt_decision_chain_rules.md",
+        "pipeline_core/paper_quality/rules/problem_by_problem_narrative_upgrade_rules.md"
+      ],
+      "structure_sample_support": [
+        {
+          "asset_id": "LIT_0035",
+          "file_name": "EXC_MIX_2015B_出租车资源配置.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0036",
+          "file_name": "EXC_MIX_2020C_中小微企业最优信贷决策.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0037",
+          "file_name": "EXC_MIX_2020C_决策树非线性规划_信贷风险与策略.pdf",
+          "classification": "stat_opt_mixed",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0038",
+          "file_name": "EXC_OPT_2016D_风电场运行维护计划优化.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0039",
+          "file_name": "EXC_OPT_2018B_0-1规划_RGV动态调度.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0040",
+          "file_name": "EXC_OPT_2020B_穿越沙漠游戏最优策略.pdf",
+          "classification": "optimization",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        },
+        {
+          "asset_id": "LIT_0042",
+          "file_name": "EXC_STAT_2018C_RFMS会员画像数据挖掘.pdf",
+          "classification": "statistics",
+          "role": "structure_sample",
+          "citation_ready": false,
+          "formal_reference_allowed": false,
+          "placeholder_allowed": false,
+          "manual_review_required": true
+        }
+      ],
+      "validation_or_case_support": [
+        "active_competition_2017B_problem1_problem2",
+        "case_03",
+        "case_10"
+      ],
+      "citation_status": {
+        "method_papers": "placeholder_only_pending_manual_review",
+        "excellent_papers": "structure_sample_only_not_citation",
+        "formal_reference_allowed": false,
+        "citation_ready": false
+      },
+      "support_type_distinction": {
+        "method_citation_support": "method papers only; current state placeholder only; formal citation before manual metadata review is forbidden",
+        "structure_sample_support": "excellent papers only; structure and quality rules only; method citation forbidden",
+        "textbook_concept_support": "knowledge cards for concepts, terminology, model boundaries and routing",
+        "case_validation_support": "completed cases or active_competition outputs for production-line validation only, not literature citation"
+      },
+      "manual_review_required": true,
+      "human_gate_required": true,
+      "final_submit_allowed": false
+    }
+  ]
+}

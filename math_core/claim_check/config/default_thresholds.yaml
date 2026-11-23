@@ -1,0 +1,71 @@
+version: "0.1"
+scope: "default_baseline"
+
+# ---- Numerical precision ----
+eps:
+  default: 1.0e-12
+  rationale: "Prevents division by zero in relative comparisons."
+
+# ---- 5.1 EDGE_BOUNDARY_FLAG ----
+boundary_tolerance:
+  default: 1.0e-9
+  rationale: >
+    Numerical tolerance for checking whether a candidate equals the observed
+    boundary (min or max of the data range). Not a statistical tolerance —
+    purely for floating-point equality checks.
+  status: "fixed_numerical"
+
+# ---- 5.2 MODEL_CONFLICT_FLAG ----
+model_conflict_relative_threshold:
+  default: 0.10
+  rationale: >
+    Baseline heuristic (10%). If the primary model and the proxy/local model
+    disagree by more than 10% relative to the primary value at a core claim
+    point, the claim requires downgrade or explicit uncertainty handling.
+    The 10% figure is a practical starting point, not a mathematical theorem.
+    Adjust per problem domain (e.g. use 5% for high-precision engineering,
+    20% for exploratory social-science claims).
+  status: "configurable_heuristic_not_universal"
+  adjustment_rule: "Record rationale in claim card when changing from default."
+
+# ---- 5.5 IMPROVEMENT_WITHIN_ERROR_FLAG ----
+improvement_error_ratio_threshold:
+  default: 1.0
+  rationale: >
+    If the predicted improvement (from observed baseline to model-predicted
+    candidate) is less than or equal to the validation error scale (e.g. LOO
+    RMSE), the claimed improvement is not statistically distinguishable from
+    noise. Threshold=1.0 means: improvement must exceed error scale to pass.
+  status: "configurable_heuristic_not_universal"
+  adjustment_rule: "May be relaxed to 0.5 when multiple-model consistency is strong."
+
+# ---- 5.3 MODEL_SELECTION_FLAG ----
+metric_tie_tolerance:
+  default: 1.0e-6
+  rationale: >
+    Baseline tolerance for comparing validation metrics. If the metric gap
+    between the selected model and the best model is within this tolerance,
+    the models are operationally tied and MODEL_SELECTION_FLAG should not
+    escalate to RED solely on rank order. Set conservatively small by default
+    to avoid masking real differences; expand only with explicit domain
+    justification.
+  status: "configurable"
+  adjustment_rule: >
+    May be widened (e.g. to 0.01 RMSE units) when domain expertise confirms
+    that fine metric differences are practically irrelevant. Document reason.
+
+# ---- Policy ----
+red_flag_policy:
+  no_red_flag_default: "auto_pass"
+  any_red_flag_requires: "human_decision"
+  note: >
+    Zero red flags → auto-pass. Prevents bureaucratic overhead for
+    well-evidenced claims. Any RED flag requires human three-way decision
+    (A_ACCEPT / B_DOWNGRADE / C_REJECT_AND_REWORK).
+
+# ---- Disclaimer ----
+disclaimer: >
+  All thresholds are heuristics. They are not mathematical theorems and do
+  not carry statistical guarantees. Threshold values may be adjusted per
+  problem domain, but every adjustment must be recorded with its rationale.
+  Heuristics must not be packaged as hard-science conclusions.

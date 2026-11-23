@@ -1,0 +1,54 @@
+{
+  "status": "PASS_WITH_LIMITATION / ROUTER_ASSET_REUSE_KNOWLEDGE_CARD_PATCH_READY",
+  "router_name": "MathModeling2026 problem_type_router baseline",
+  "default_mode": "dry-run",
+  "final_submit_allowed": false,
+  "human_gate_required": true,
+  "allowed_case_scope": [
+    "cases/active_competition/current_case"
+  ],
+  "model_library_inputs": [
+    "pipeline_core/model_library/model_route_registry.json",
+    "pipeline_core/model_library/problem_type_router_spec.md",
+    "pipeline_core/model_library/problem_type_taxonomy.md",
+    "pipeline_core/model_library/model_route_registry.md",
+    "pipeline_core/model_library/validation_metric_catalog.md",
+    "pipeline_core/model_library/sensitivity_analysis_catalog.md",
+    "pipeline_core/model_library/paper_structure_by_problem_type.md",
+    "pipeline_core/model_library/routing_risk_register.md",
+    "pipeline_core/model_library/active_competition_routing_usage.md"
+  ],
+  "active_case_inputs": [
+    "case_config.json",
+    "intake/problem_statement_extraction.md",
+    "intake/data_availability_check.md",
+    "intake/constraint_completeness_check.md",
+    "data/schema/data_dictionary.md",
+    "data/schema/field_mapping.json",
+    "data/schema/missing_value_report.md",
+    "data/schema/data_quality_report.md",
+    "data/schema/anomaly_review_report.md",
+    "data/schema/modeling_input_boundary.md"
+  ],
+  "canonical_problem_types": [
+    "statistical_analysis",
+    "prediction_timeseries",
+    "optimization_planning",
+    "evaluation_decision",
+    "graph_network_spatial",
+    "dynamic_scheduling",
+    "mechanism_fitting",
+    "classification_clustering",
+    "multi_objective_decision",
+    "mixed_problem"
+  ],
+  "safety_rules": {
+    "no_model_execution": true,
+    "no_optimization_execution": true,
+    "no_paper_generation": true,
+    "no_final_submit_creation": true,
+    "no_human_gate_auto_approval": true,
+    "no_history_case_result_reading": true,
+    "no_mechanism_fixture_reference": true
+  }
+}

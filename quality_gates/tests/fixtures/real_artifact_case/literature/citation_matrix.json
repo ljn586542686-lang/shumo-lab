@@ -1,0 +1,16 @@
+{
+  "citations": [
+    {
+      "citation_id": "method2024",
+      "supported_claim": "claim_method_baseline",
+      "evidence_anchor": "paper/draft/main.tex#method",
+      "source_position": "Section 2"
+    },
+    {
+      "citation_id": "background2023",
+      "background_only": true,
+      "evidence_anchor": "paper/draft/main.tex#background",
+      "source_position": "Introduction"
+    }
+  ]
+}

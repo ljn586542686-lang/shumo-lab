@@ -1,0 +1,61 @@
+{
+  "claim_id": "SYNTHETIC-BOUNDARY-01",
+  "claim_title": "合成边界候选",
+  "claim_type": "optimal_condition",
+  "case_id": "synthetic_boundary",
+  "source_section": "练习",
+  "claim_text": "待核对的假设：边界点为最优。",
+  "generator_role_id": "fixture_a",
+  "adversarial_role_id": "fixture_b",
+  "evidence_inputs": [
+    {
+      "field_name": "candidate_is_boundary",
+      "value": true,
+      "provider_role_id": "fixture_a",
+      "verification_status": "computed",
+      "source_type": "computed_from_raw_data"
+    },
+    {
+      "field_name": "predicted_value",
+      "value": 8,
+      "provider_role_id": "fixture_a",
+      "verification_status": "computed",
+      "source_type": "computed_from_raw_data"
+    },
+    {
+      "field_name": "proxy_or_local_model_value_if_available",
+      "value": 4,
+      "provider_role_id": "fixture_a",
+      "verification_status": "computed",
+      "source_type": "computed_from_raw_data"
+    },
+    {
+      "field_name": "selected_model",
+      "value": "line",
+      "provider_role_id": "fixture_a",
+      "verification_status": "computed",
+      "source_type": "computed_from_raw_data"
+    },
+    {
+      "field_name": "best_model_by_primary_validation_metric",
+      "value": "curve",
+      "provider_role_id": "fixture_a",
+      "verification_status": "computed",
+      "source_type": "computed_from_raw_data"
+    },
+    {
+      "field_name": "selected_model_metric_value",
+      "value": 2,
+      "provider_role_id": "fixture_a",
+      "verification_status": "computed",
+      "source_type": "computed_from_raw_data"
+    },
+    {
+      "field_name": "best_model_metric_value",
+      "value": 1,
+      "provider_role_id": "fixture_a",
+      "verification_status": "computed",
+      "source_type": "computed_from_raw_data"
+    }
+  ]
+}

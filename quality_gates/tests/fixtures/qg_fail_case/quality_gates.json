@@ -1,0 +1,75 @@
+{
+  "declared_key_inputs": [
+    {"path": "data/raw/attachment_a.csv", "usage": "model"},
+    {"path": "data/raw/attachment_b.csv", "usage": "model"}
+  ],
+  "consumed_inputs": [
+    "data/raw/attachment_a.csv"
+  ],
+  "predictions": [
+    {
+      "id": "undisclosed_extrapolation",
+      "pred_value": 150,
+      "train_target_min": 10,
+      "train_target_max": 100,
+      "max_observed_value": 100,
+      "recommended_x": 100,
+      "observed_x_min": 0,
+      "observed_x_max": 100
+    }
+  ],
+  "sensitivity_parameters": ["alpha"],
+  "composite_target": {
+    "formula": "Y=f(X,S)"
+  },
+  "candidate_points": [
+    {"id": "p1"}
+  ],
+  "model_comparison": {
+    "metric_direction": "minimize",
+    "main_model": "model_c",
+    "models": [
+      {"model_id": "model_a", "RMSE": 1.00},
+      {"model_id": "model_b", "RMSE": 1.05},
+      {"model_id": "model_c", "RMSE": 1.10}
+    ]
+  },
+  "symbols_defined": [
+    {"name": "lambda"},
+    {"name": "beta"},
+    {"name": "dummy_city"}
+  ],
+  "equations_used": [
+    "Y = beta * X"
+  ],
+  "model_formula": "Y = beta * X",
+  "model_metadata": {
+    "formula": "Y = beta * X"
+  },
+  "paper_effective_rows_claim": 95,
+  "parsed_text_or_combination_features": ["dummy_city"],
+  "figure_manifest": {
+    "figures": [
+      {
+        "figure_id": "fig_busy_diagnostic",
+        "path": "output/figures/fig_busy_diagnostic.png",
+        "figure_type": "line",
+        "series_count": 12,
+        "caption": "Prediction versus observed values"
+      }
+    ]
+  },
+  "citation_matrix": {
+    "citations": [
+      {
+        "citation_id": "emptyclaim2023",
+        "supported_claim": "",
+        "evidence_anchor": ""
+      }
+    ]
+  },
+  "abstract_sections": {
+    "method": "Method: compare multiple candidate models.",
+    "result": "Result: RMSE 0.82, R2 0.91, MAE 0.21."
+  }
+}

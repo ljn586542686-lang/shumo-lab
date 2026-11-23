@@ -1,0 +1,4 @@
+model,RMSE,MAE
+baseline_average,1.00,0.82
+interpretable_regression,1.05,0.80
+tree_baseline,1.08,0.79

@@ -1,0 +1,46 @@
+{
+  "schema_version": "x5_f4_fixture_evidence_map_v1",
+  "scope": "fixture",
+  "item_count": 3,
+  "items": [
+    {
+      "evidence_id": "fixture-result-summary",
+      "artifact_path": "output/result_summary.json",
+      "artifact_type": "result_summary",
+      "source_script": "fixture",
+      "run_id": "real_artifact_fixture_run",
+      "sha256": "fixture-not-final",
+      "created_at": "2026-06-20T00:00:00+00:00",
+      "upstream_inputs": [
+        "data/raw/sample_observations.csv"
+      ],
+      "notes": "Fixture evidence item for QG dry-run."
+    },
+    {
+      "evidence_id": "fixture-table",
+      "artifact_path": "output/tables/model_metrics.csv",
+      "artifact_type": "table",
+      "source_script": "fixture",
+      "run_id": "real_artifact_fixture_run",
+      "sha256": "fixture-not-final",
+      "created_at": "2026-06-20T00:00:00+00:00",
+      "upstream_inputs": [
+        "data/raw/sample_observations.csv"
+      ],
+      "notes": "Fixture table evidence item."
+    },
+    {
+      "evidence_id": "fixture-figure",
+      "artifact_path": "output/figures/diagnostic_prediction.png",
+      "artifact_type": "figure",
+      "source_script": "fixture",
+      "run_id": "real_artifact_fixture_run",
+      "sha256": "fixture-not-final",
+      "created_at": "2026-06-20T00:00:00+00:00",
+      "upstream_inputs": [
+        "data/raw/sample_observations.csv"
+      ],
+      "notes": "Fixture figure evidence item."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "x5_f0_release_authorization_v1",
+  "final_submit_auto_creation_allowed": false,
+  "release_requires_manual_authorization": true,
+  "captain_confirmation": {
+    "name": "",
+    "approved": false,
+    "approved_at": null,
+    "note": "Default release path requires captain confirmation."
+  },
+  "member_approvals": [
+    {
+      "name": "",
+      "role": "member_1",
+      "approved": false,
+      "approved_at": null
+    },
+    {
+      "name": "",
+      "role": "member_2",
+      "approved": false,
+      "approved_at": null
+    },
+    {
+      "name": "",
+      "role": "member_3",
+      "approved": false,
+      "approved_at": null
+    }
+  ],
+  "two_of_three_allowed_when_captain_unavailable": true,
+  "fatal_risk_override_requires_record": true,
+  "fatal_risk_override_record": "",
+  "authorization_log": []
+}

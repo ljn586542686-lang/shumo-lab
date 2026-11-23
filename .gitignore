@@ -1,0 +1,58 @@
+# Collaboration snapshot: generated artifacts and local runtime state
+.git/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+**/__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs and LaTeX build products
+*.log
+*.aux
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.tmp
+*.bak
+debug.log
+
+# Generated/release workspaces
+work_tmp/
+**/work_tmp/
+candidate_submit/
+candidate_emergency/
+final_submit/
+tmp/
+
+# Intentionally external assets and the rejected audit archive
+MathModeling2026_audit_core.zip
+pipeline_core/literature/assets/**/*.pdf
+
+# Local editor/agent state
+.vscode/
+.claude/
+!.vscode/
+!.vscode/extensions.json
+
+# Sensitive local configuration
+.env
+.env.*
+*.pem
+*.key
+id_rsa
+*secret*
+*credential*
+*password*
+*passwd*
+
+# Local cases, data and authorization records
+/cases/*
+!/cases/case_template/
+.spreadsheet_runtime/
+tmp_pdf_review*/
+figure_data_package/
+*.zip

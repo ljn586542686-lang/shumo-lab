@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "freeze_active": true,
+  "phase": "P4-TD",
+  "reason": "P4-S1R golden-case smoke passed and P4-TD tier-driven defaults are explicitly authorized.",
+  "unlock_condition": "Golden case good path passes through run_case, bad path blocks through run_case, candidate is not created, final_submit is not created.",
+  "allowed_roadmap_after_unlock": [
+    "XVAL-10 independent rerun/diff",
+    "route direction review gate"
+  ],
+  "known_p4_fx_status": "P4-S1R_GOLDEN_CASE_SMOKE_PASS",
+  "known_future_candidate": "cases/case_08_pipeline_integrated_regression_test",
+  "known_future_blocker": "NONE_FOR_P4_TD_AFTER_P4_S1R",
+  "allowlist": [
+    "scripts/stabilization_freeze.py",
+    "pipeline_core/tests/test_stabilization_freeze.py",
+    "docs/status/STABILIZATION_FREEZE_POLICY.json",
+    "docs/status/STABILIZATION_FREEZE_BASELINE.json"
+  ]
+}

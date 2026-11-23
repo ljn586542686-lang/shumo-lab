@@ -1,0 +1,98 @@
+{
+  "case_id": "case_template",
+  "case_name": "New Math Modeling Case Template",
+  "status": "CASE_INTAKE",
+  "current_stage": "CASE_INTAKE",
+  "previous_stage": null,
+  "next_allowed_stage": "PROBLEM_UNDERSTANDING",
+  "state_authority": "case_config.json",
+  "transition_authority": "transition_case_v1",
+  "state_revision": 0,
+  "current_handoff_path": "CURRENT_HANDOFF.md",
+  "active_case": false,
+  "created_from": "MathModeling2026 V3.0 case_template",
+  "problem_statement_files": [],
+  "attachment_files": [],
+  "entry_points": {
+    "matlab": "code/matlab/main.m",
+    "python": "code/python/run_pipeline.py",
+    "paper": "paper/main.tex"
+  },
+  "competition_governance": {
+    "enabled": true,
+    "numerical_certification": {
+      "status": "PENDING"
+    }
+  },
+  "required_outputs": [
+    "output/result_summary.txt",
+    "output/result_summary.json",
+    "evidence_map.md",
+    "literature/selected_knowledge_cards.md",
+    "literature/citation_matrix.md",
+    "output/sensitivity/sensitivity_report.md",
+    "output/validation/knowledge_card_trace.md",
+    "output/validation/theory_check_report.md",
+    "output/validation/output_contract_report.md",
+    "output/validation/evidence_trace_report.md",
+    "output/validation/citation_audit_report.md",
+    "output/validation/national_award_score_estimate.md",
+    "output/validation/final_submit_checklist.md",
+    "ai_disclosure/AI工具使用详情.md"
+  ],
+  "human_gates": [
+    "human_review/gate_1_problem_understanding.md",
+    "human_review/gate_2_model_choice.md",
+    "human_review/gate_3_result_acceptance.md",
+    "human_review/gate_4_final_submission.md"
+  ],
+  "rules": {
+    "do_not_invent_data": true,
+    "do_not_use_humanizer": true,
+    "require_evidence_map": true,
+    "require_citation_matrix": true,
+    "require_ai_disclosure": true,
+    "freeze_only_after_validation": true
+  },
+  "knowledge_card_enabled": true,
+  "theory_checker_enabled": true,
+  "citation_audit_enabled": true,
+  "ai_disclosure_required": true,
+  "human_review_required": true,
+  "national_award_score_enabled": true,
+  "submission_tier": "training",
+  "human_revision_mode": "off",
+  "human_revision_required": false,
+  "human_revision_record_path": "human_review/human_revision_record.json",
+  "claim_check_required": false,
+  "core_claims": [],
+  "official_submission_mode": "locked",
+  "final_submit_allowed": false,
+  "citation_ready": false,
+  "formal_reference_allowed": false,
+  "human_gate_status": "PENDING_MANUAL_REVIEW",
+  "writing_contract_version": "controlled_writing_layer_v5",
+  "argument_blueprint_required": true,
+  "final_submit_authorization_path": "human_review/final_submit_authorization.json",
+  "required_final_artifacts": [
+    "paper/visual_reasoning_trace_report.json",
+    "paper/argument_blueprint_trace_report.json"
+  ],
+  "result_consistency_enabled": false,
+  "result_consistency_required": false,
+  "result_consistency_manifest_path": "output/validation/result_consistency_manifest.json",
+  "sensitivity_required": false,
+  "tournament_required": false,
+  "sensitivity_skip_reason": "",
+  "tournament_skip_reason": "",
+  "sensitivity_hook": {
+    "enabled": false,
+    "adapter": "",
+    "output_dir": "output/sensitivity"
+  },
+  "tournament_hook": {
+    "enabled": false,
+    "adapter": "",
+    "output_dir": "output/optimizer_arena"
+  }
+}

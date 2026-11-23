@@ -1,0 +1,43 @@
+{
+  "schema_version": "x5_f4_fixture_result_summary_v1",
+  "case_id": "real_artifact_case",
+  "run_id": "real_artifact_fixture_run",
+  "created_at": "2026-06-20T00:00:00+00:00",
+  "success": true,
+  "status": "ok",
+  "metrics": {
+    "RMSE": 1.05,
+    "MAE": 0.8
+  },
+  "primary_results": {
+    "selected_model": "interpretable_regression",
+    "forecast_range": [
+      88,
+      96
+    ]
+  },
+  "model_outputs": {
+    "selected_model": "interpretable_regression",
+    "forecast_range": [
+      88,
+      96
+    ]
+  },
+  "artifacts": [
+    "output/tables/model_metrics.csv",
+    "output/figures/diagnostic_prediction.png"
+  ],
+  "data_sources": [
+    "data/raw/sample_observations.csv"
+  ],
+  "units": {
+    "demand": "units"
+  },
+  "validation_status": "PASS_WITH_WARNING",
+  "warnings": [
+    "Fixture requires manual review for diagnostic figure and background citation."
+  ],
+  "fatal_items": [],
+  "risk_items": [],
+  "fatal_count": 0
+}

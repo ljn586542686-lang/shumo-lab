@@ -1,0 +1,115 @@
+{
+  "declared_key_inputs": [
+    {
+      "path": "data/raw/sample_observations.csv",
+      "usage": "model"
+    }
+  ],
+  "consumed_inputs": [
+    "data/raw/sample_observations.csv"
+  ],
+  "predictions": [
+    {
+      "id": "forecast_safe",
+      "pred_value": 92,
+      "train_target_min": 50,
+      "train_target_max": 120,
+      "max_observed_value": 120,
+      "recommended_x": 60,
+      "observed_x_min": 40,
+      "observed_x_max": 100
+    }
+  ],
+  "sensitivity_parameters": [
+    "alpha",
+    "beta"
+  ],
+  "composite_target": {
+    "formula": "Y=f(X,S)",
+    "input_uncertainty": {
+      "X": 0.05,
+      "S": 0.08
+    },
+    "pred_interval": [
+      88,
+      96
+    ]
+  },
+  "candidate_points": [
+    {
+      "id": "p1",
+      "pred_interval": [
+        88,
+        96
+      ]
+    }
+  ],
+  "model_comparison": {
+    "metric_direction": "minimize",
+    "main_model": "interpretable_regression",
+    "models": [
+      {
+        "model_id": "baseline_average",
+        "RMSE": 1.00
+      },
+      {
+        "model_id": "interpretable_regression",
+        "RMSE": 1.05
+      },
+      {
+        "model_id": "tree_baseline",
+        "RMSE": 1.08
+      }
+    ],
+    "selection_criteria": {
+      "interpretability_score": 0.9,
+      "complexity_penalty": 0.2
+    }
+  },
+  "symbols_defined": [
+    {
+      "name": "alpha"
+    },
+    {
+      "name": "beta"
+    },
+    {
+      "name": "Y"
+    }
+  ],
+  "equations_used": [
+    "Y = alpha + beta X"
+  ],
+  "model_formula": "Y = alpha + beta X",
+  "model_metadata": {
+    "formula": "Y = alpha + beta X",
+    "coefficients": {
+      "alpha": 1.0,
+      "beta": 0.8
+    },
+    "hyperparameters": {
+      "window": 3
+    }
+  },
+  "preprocessing_log": {
+    "raw_rows": 120,
+    "removed_rows": 4,
+    "removal_rules": [
+      "drop_missing_target"
+    ],
+    "final_rows": 116,
+    "derived_feature_rules": [
+      "category -> category_dummy"
+    ]
+  },
+  "paper_effective_rows_claim": 116,
+  "parsed_text_or_combination_features": [
+    "category_dummy"
+  ],
+  "domain_terms": [
+    "demand",
+    "supplier",
+    "forecast"
+  ],
+  "conclusion_claim": "Demand remains within the observed planning range for the stable supplier group."
+}

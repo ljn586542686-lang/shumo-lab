@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "enabled": false,
+  "submission_tier": "training",
+  "submitted_text_sources": [],
+  "expected_identity": {
+    "name": "",
+    "class": "",
+    "enabled": false
+  },
+  "forbidden_title_terms": ["\u7b2c\u4e94\u7248"],
+  "objective_source_required": false,
+  "constraint_source_required": false,
+  "objective_source_anchors": ["\u76ee\u6807\u51fd\u6570\u6765\u6e90", "\u76ee\u6807\u51fd\u6570\u7684\u6765\u6e90", "\u76ee\u6807\u51fd\u6570\u7531", "objective source"],
+  "constraint_source_anchors": ["\u7ea6\u675f\u6765\u6e90", "\u7ea6\u675f\u6761\u4ef6\u6765\u6e90", "\u7ea6\u675f\u7531", "constraint source"],
+  "code_appendix_required": false,
+  "declared_code_files": [],
+  "appendix_code_files": [],
+  "appendix_markers": [],
+  "allow_passive_provenance_internal_only": true
+}

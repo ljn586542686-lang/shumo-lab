@@ -1,0 +1,171 @@
+% !TeX program = xelatex
+\documentclass[UTF8,a4paper,12pt,fontset=none]{ctexart}
+
+% This is the single authoritative competition-paper template.
+% The deterministic renderer owns the structure below; writer fragments own
+% content only and are inserted through \PaperContent.
+\usepackage[left=2.7cm,right=2.7cm,top=2.54cm,bottom=2.54cm,footskip=1.0cm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,tabularx,array,multirow}
+\usepackage{graphicx,float}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
+\usepackage{needspace}
+\usepackage{placeins}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{cite}
+\usepackage[hidelinks]{hyperref}
+% Preserve the complete numeric citation, including equal-sized brackets,
+% and raise the whole mark as one unit.  The cite package still provides
+% sorting and range compression inside the brackets.
+\let\PaperOriginalCite\cite
+\renewcommand{\cite}[1]{\textsuperscript{\PaperOriginalCite{#1}}}
+
+% Chinese section numbering and numeric subsection numbering are template
+% behavior, not writer output.
+\ctexset{
+  section={
+    name={,、},
+    number=\chinese{section},
+    aftername={}
+  },
+  subsection={
+    number=\arabic{section}.\arabic{subsection}
+  },
+  subsubsection={
+    number=\arabic{section}.\arabic{subsection}.\arabic{subsubsection}
+  }
+}
+
+% Bind Windows font files directly when available.  This avoids depending on
+% editor-specific font aliases; the bundled TeX fonts keep CI/smoke builds
+% reproducible on hosts without Windows fonts.
+\IfFileExists{C:/Windows/Fonts/times.ttf}{%
+  \setmainfont[
+    Path=C:/Windows/Fonts/,
+    UprightFont=times.ttf,
+    BoldFont=timesbd.ttf,
+    ItalicFont=timesi.ttf,
+    BoldItalicFont=timesbi.ttf
+  ]{times.ttf}%
+}{\setmainfont{TeX Gyre Termes}}
+\IfFileExists{C:/Windows/Fonts/simsun.ttc}{%
+  \setCJKmainfont[Path=C:/Windows/Fonts/,AutoFakeBold=2]{simsun.ttc}%
+}{\setCJKmainfont[BoldFont=FandolSong-Bold]{FandolSong-Regular}}
+\IfFileExists{C:/Windows/Fonts/simhei.ttf}{%
+  \setCJKfamilyfont{paperhei}[Path=C:/Windows/Fonts/]{simhei.ttf}%
+}{\setCJKfamilyfont{paperhei}[BoldFont=FandolHei-Bold]{FandolHei-Regular}}
+\providecommand{\heiti}{}
+\renewcommand{\heiti}{\CJKfamily{paperhei}}
+\IfFileExists{C:/Windows/Fonts/simkai.ttf}{%
+  \setCJKfamilyfont{paperkai}[Path=C:/Windows/Fonts/]{simkai.ttf}%
+}{\setCJKfamilyfont{paperkai}[BoldFont=FandolKai-Bold]{FandolKai-Regular}}
+\providecommand{\kaishu}{}
+\renewcommand{\kaishu}{\CJKfamily{paperkai}}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{1em}
+\setstretch{1}
+\selectfont
+
+\titleformat{\section}
+  {\filcenter\zihao{4}\heiti}
+  {\thesection}{0pt}{}
+\titleformat{\subsection}
+  {\zihao{-4}\heiti}
+  {\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}
+  {\zihao{-4}\heiti}
+  {\thesubsubsection}{0.6em}{}
+% titlesec is loaded after ctex's numbering setup; keep the visible section
+% counter explicitly Chinese-numbered in the authoritative title format.
+\renewcommand{\thesection}{\chinese{section}、}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+\titlespacing*{\section}{0pt}{1.0em plus .15em minus .1em}{0.55em}
+\titlespacing*{\subsection}{0pt}{0.65em plus .1em minus .05em}{0.25em}
+\titlespacing*{\subsubsection}{0pt}{0.45em plus .08em minus .04em}{0.15em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\DeclareCaptionFont{paperfive}{\kaishu\zihao{5}}
+\captionsetup{font=paperfive,labelfont=paperfive,labelsep=space,skip=4pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{6pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\floatplacement{figure}{htbp}
+\floatplacement{table}{htbp}
+\AtBeginEnvironment{thebibliography}{\footnotesize\setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{0pt}}
+
+% Short tables and figures remain attached to the section that owns them.
+\newcommand{\ShortTableSpace}{\Needspace{7\baselineskip}}
+\newenvironment{ShortTable}[2]
+{\ShortTableSpace\begin{table}[htbp]\centering\caption{#1}\small\begin{tabularx}{#2}{>{\raggedright\arraybackslash}X}}
+{\end{tabularx}\end{table}}
+\newenvironment{PaperTable}[2]
+{\ShortTableSpace\begin{table}[htbp]\centering\caption{#1}\small\begin{tabular}{#2}\toprule}
+{\tabularnewline\bottomrule\end{tabular}\end{table}}
+\newcommand{\PaperTableHead}[1]{{\kaishu #1}}
+\newcommand{\PaperFigure}[4][0.84\textwidth]
+{\Needspace{10\baselineskip}\begin{figure}[htbp]\centering\includegraphics[width=#1,height=0.43\textheight,keepaspectratio]{#2}\caption{#3}\label{#4}\end{figure}}
+\newenvironment{PaperAssumptions}
+{\par\setlength{\parindent}{2em}\setlength{\parskip}{0pt}}
+{\par}
+\newenvironment{PaperAppendix}{\begingroup\zihao{-4}\setstretch{1}\selectfont}{\endgroup}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,breakatwhitespace=false,columns=fullflexible,keepspaces=true,showstringspaces=false,frame=single}
+\newenvironment{PaperAbstract}
+{\noindent\begin{minipage}{\textwidth}
+ \setlength{\parindent}{2em}\setlength{\parskip}{0pt}
+ \begin{center}{\heiti\zihao{4} 摘\quad 要}\end{center}}
+{\end{minipage}}
+
+% The renderer copies validated writer fragments to this directory.
+\newcommand{\PaperContent}[1]{\input{writer_content/#1.tex}}
+\newcommand{\EqRef}[1]{式（\ref{#1}）}
+
+% The numbered reference heading is owned by the renderer.  This local list
+% keeps \bibitem/citation behavior without the standard unnumbered heading.
+\makeatletter
+\newenvironment{PaperReferences}[1]
+{\begingroup
+  \list{\@biblabel{\@arabic\c@enumiv}}%
+    {\settowidth\labelwidth{\@biblabel{#1}}%
+     \leftmargin\labelwidth
+     \advance\leftmargin\labelsep
+     \@openbib@code
+     \usecounter{enumiv}%
+     \let\p@enumiv\@empty
+     \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+  \sloppy
+  \clubpenalty4000
+  \widowpenalty4000}
+{\def\@noitemerr{\@latex@warning{Empty `PaperReferences' environment}}\endlist\endgroup}
+\makeatother
+
+\begin{document}
+\zihao{-4}
+\begin{center}
+  {\zihao{3}\heiti\PaperContent{title}\par}
+\end{center}
+\vspace{0.8em}
+
+\begin{PaperAbstract}
+\par\noindent\hspace*{2em}\PaperContent{abstract}
+\par\vspace{0.35em}
+\noindent\textbf{关键词：}\PaperContent{keywords}
+\end{PaperAbstract}
+\clearpage
+
+% PAPER_RENDERER:STRUCTURE_BODY
+
+\end{document}

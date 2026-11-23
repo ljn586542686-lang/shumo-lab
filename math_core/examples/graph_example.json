@@ -1,0 +1,13 @@
+{
+  "model_type": "graph.shortest_path",
+  "nodes": ["A", "B", "C", "D"],
+  "edges": [
+    ["A", "B", 1],
+    ["B", "C", 2],
+    ["A", "C", 5],
+    ["C", "D", 1]
+  ],
+  "source": "A",
+  "target": "D",
+  "directed": false
+}

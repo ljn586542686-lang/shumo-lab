@@ -1,0 +1,98 @@
+{
+  "declared_key_inputs": [
+    {"path": "data/raw/attachment_a.csv", "usage": "model"},
+    {"path": "data/raw/attachment_b.csv", "usage": "model"}
+  ],
+  "consumed_inputs": [
+    "data/raw/attachment_a.csv",
+    "data/raw/attachment_b.csv"
+  ],
+  "predictions": [
+    {
+      "id": "safe_forecast",
+      "pred_value": 95,
+      "train_target_min": 10,
+      "train_target_max": 100,
+      "max_observed_value": 100,
+      "recommended_x": 50,
+      "observed_x_min": 0,
+      "observed_x_max": 100
+    }
+  ],
+  "sensitivity_parameters": ["alpha", "beta"],
+  "composite_target": {
+    "formula": "Y=f(X,S)",
+    "input_uncertainty": {"X": 0.05, "S": 0.1},
+    "pred_interval": [90, 100]
+  },
+  "candidate_points": [
+    {"id": "p1", "pred_interval": [90, 100]}
+  ],
+  "model_comparison": {
+    "metric_direction": "minimize",
+    "main_model": "model_b",
+    "models": [
+      {"model_id": "model_a", "RMSE": 1.00},
+      {"model_id": "model_b", "RMSE": 1.04},
+      {"model_id": "model_c", "RMSE": 1.08}
+    ],
+    "selection_criteria": {
+      "interpretability_score": 0.9,
+      "complexity_penalty": 0.1
+    }
+  },
+  "symbols_defined": [
+    {"name": "lambda"},
+    {"name": "beta"},
+    {"name": "dummy_city"}
+  ],
+  "equations_used": [
+    "Y = beta * X + lambda * S + dummy_city"
+  ],
+  "model_formula": "Y = beta * X + lambda * S + dummy_city",
+  "model_metadata": {
+    "formula": "Y = beta * X + lambda * S + dummy_city",
+    "coefficients": {"beta": 1.2, "lambda": 0.3},
+    "hyperparameters": {"regularization": 0.01}
+  },
+  "preprocessing_log": {
+    "raw_rows": 100,
+    "removed_rows": 5,
+    "removal_rules": ["drop_missing_target"],
+    "final_rows": 95,
+    "derived_feature_rules": ["city -> dummy_city"]
+  },
+  "paper_effective_rows_claim": 95,
+  "parsed_text_or_combination_features": ["dummy_city"],
+  "figure_manifest": {
+    "figures": [
+      {
+        "figure_id": "fig_forecast_trend",
+        "path": "output/figures/fig_forecast_trend.png",
+        "figure_type": "line",
+        "series_count": 3,
+        "caption": "Forecast trend by region",
+        "linked_claim": "claim_forecast_stability",
+        "interpretation": "The figure supports the stable regional trend claim."
+      }
+    ]
+  },
+  "citation_matrix": {
+    "citations": [
+      {
+        "citation_id": "smith2024baseline",
+        "supported_claim": "claim_method_baseline",
+        "evidence_anchor": "paper/draft/main.tex#method",
+        "source_position": "Section 2"
+      }
+    ]
+  },
+  "abstract_sections": {
+    "problem": "Problem: estimate regional demand and compare candidate forecasts.",
+    "method": "Method: use a moving-average baseline and a regression comparison.",
+    "result": "Result: the northern region demand remains stable while RMSE is 0.82.",
+    "conclusion": "Conclusion: the model supports conservative inventory planning for northern region demand."
+  },
+  "domain_terms": ["northern region", "demand", "inventory"],
+  "conclusion_claim": "Demand remains stable enough for conservative inventory planning."
+}

@@ -1,0 +1,14 @@
+{
+  "figures": [
+    {
+      "figure_id": "diagnostic_prediction",
+      "path": "output/figures/diagnostic_prediction.png",
+      "figure_type": "prediction_vs_observed",
+      "series_count": 2,
+      "caption": "Prediction versus observed demand",
+      "diagnostic_figure": true,
+      "linked_claim": "claim_prediction_stability",
+      "interpretation": "The diagnostic plot supports a bounded error discussion but still requires manual review."
+    }
+  ]
+}

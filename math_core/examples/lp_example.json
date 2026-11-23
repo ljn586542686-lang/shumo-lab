@@ -1,0 +1,8 @@
+{
+  "model_type": "optimization.linear_program",
+  "c": [1, 1],
+  "A_ub": [[-1, -1]],
+  "b_ub": [-1],
+  "bounds": [[0, null], [0, null]],
+  "constraint_violation_tolerance": 1e-7
+}
