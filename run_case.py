@@ -48,6 +48,7 @@ from x5_surgical_utils import (
     write_json,
     write_risk_summary,
 )
+from pipeline_core.python_tools.case_paths import resolve_case_relative_path
 from pipeline_core.python_tools.human_gate import (
     COMPETITION_MODES,
     authorize_stage_transition,
@@ -1713,18 +1714,12 @@ def _xval_machine_record(
 def _case_relative_file(case_dir: Path, relative_path: object) -> tuple[Path, str] | None:
     """Return a safe, existing case-relative file and its normalized path."""
 
-    if not isinstance(relative_path, str) or not relative_path.strip():
+    if not isinstance(relative_path, str):
         return None
-    candidate = Path(relative_path)
-    if candidate.is_absolute() or ".." in candidate.parts:
+    resolved = resolve_case_relative_path(case_dir, relative_path)
+    if resolved is None or not resolved.is_file():
         return None
-    resolved_case = case_dir.resolve()
-    resolved = (case_dir / candidate).resolve()
-    try:
-        normalized = resolved.relative_to(resolved_case).as_posix()
-    except ValueError:
-        return None
-    return (resolved, normalized) if resolved.is_file() else None
+    return resolved, resolved.relative_to(case_dir.resolve()).as_posix()
 
 
 def _validated_content_bindings(

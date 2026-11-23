@@ -2,11 +2,11 @@
 
 我参加数学建模比赛时做了这套工具。和 AI 聊过几种解法后，我想把选模型的理由记下来。写论文时，看到表里的一个数，也能回头查到它是哪次计算得出来的。
 
-下面用一个弹簧标定的例子走一遍。你可以直接跑代码看看刚度是多少，也可以自己选一次模型，再把核对过的结果写进一份短稿。例子用的是合成数据。比赛时用过的储能预测、滚动调度、文献核对和 AI 使用记录等工具也放在仓库里。[赛时功能对照表](docs/功能对照表.md)
+下面用一组合成的弹簧读数做标定。你可以直接算出弹簧的刚度，也可以先选模型，再看看两种解法各自怎么算、用哪个点验算，最后打开这次标定的图、表和实验记录。比赛时用过的储能预测、滚动调度、文献核对和 AI 使用记录等工具也放在仓库里。[赛时功能对照表](docs/功能对照表.md)
 
 ## 先算一根弹簧的刚度
 
-打开仓库根目录，在终端运行下面两行。这个例子在 Windows 和 Python 3.12.0 上跑过，可以直接在本地计算。
+打开仓库根目录，在终端运行下面两行。这个例子在 Windows 和 Linux 上都用 Python 3.12 跑过。
 
 ```powershell
 python -m pip install -r requirements-dev.txt
@@ -24,7 +24,7 @@ Absolute error: 0 N
 Check (tolerance 1e-09 N): PASS
 ```
 
-拟合出的刚度是 2 N/mm，截距接近零。用这条直线预测 4 mm 处的拉力，算出 8 N，和事先留出的值相同。4 mm 已经超出了用来拟合的 1–3 mm 区间。要知道真实弹簧再拉长一些会怎样，还得在那个范围里测一测。
+拟合出的刚度是 2 N/mm。截距在浮点精度下接近零，不同数值库算出的末几位可能不同。用这条直线预测 4 mm 处的拉力，算出 8 N，和事先留出的值相同。4 mm 已经超出了用来拟合的 1–3 mm 区间。要知道真实弹簧再拉长一些会怎样，还得在那个范围里测一测。
 
 ## 自己选一次模型
 
@@ -39,7 +39,7 @@ python -m examples.spring_workshop
 1. **看数据。** 打开 `data/raw/spring.csv` 和 `problem_analysis.md`，分清哪三个点用来拟合，哪个点用来检验。在 `human_review/gate_1_problem_understanding.md` 逐项核对，选一个决定，填上确认人和时间。有问题也可以选退回。
 2. **选模型。** 对照 `model_routes.md` 和 `model_route_score.xlsx`，在 `human_review/gate_2_model_choice.md` 的“选择路线”处填入完整路线名 `R1：带截距直线` 或 `R2：过原点直线`。“选择理由”里写明你对零点的假设，以及为什么放下另一种解法。按文件要求填写决定、确认人和时间。文件里还需要标题 `## 批准后的正式建模/求解前强制 fail-closed 条件`，在下面用列表写至少一条你要求满足的条件，例如保留第四个点做独立检验。
 3. **对数字。** 选 R1 时，程序调用 `math_core.registry.run_model` 估计斜率和截距。选 R2 时，截距固定为零，用最小二乘法算斜率。两条路线都会用第四个点检验预测，再独立算一遍。打开 `output/result_summary.json`、`output/tables/calibration.csv` 和 `output/figures/calibration.png`，对照 `evidence_map.md` 核对后，填写 `human_review/gate_3_result_acceptance.md`。
-4. **读教学稿。** 第三次确认后再运行一次，稿子在 `learning_draft/tex/main.tex`。成稿前程序会重查数据、选定的模型、结果文件和图表。比如删掉结果文件，它就会停下来。这个教学例子走到 `RESULT_ACCEPTANCE` 为止，正式交付另需签署。
+4. **看标定记录。** 第三次确认后再运行，程序会重查原始数据、选定的模型、结果文件和图表。比如删掉结果文件，它就会停下来。核对通过后，程序把本次拟合的斜率、预测值和误差填进预先写好的教学说明，排成 `learning_draft/tex/main.tex`。这个例子走到 `RESULT_ACCEPTANCE` 为止。
 
 想和 AI 讨论第二步，可以直接问它下面这两个问题。
 
@@ -51,10 +51,10 @@ python -m examples.spring_workshop
 python -m pipeline_core.python_tools.transition_case --case cases/synthetic_spring status
 ```
 
-要看排版后的 PDF，先装好 XeLaTeX 和模板用到的字体。等 `main.tex` 生成后，从仓库根目录运行下面三行。
+想看这份标定记录的 PDF，先装好 XeLaTeX 和模板用到的字体。看到 `learning_draft/tex/main.tex` 后，从仓库根目录运行下面三行。
 
 ```powershell
-Set-Location cases/synthetic_spring/learning_draft/tex
+cd cases/synthetic_spring/learning_draft/tex
 xelatex -halt-on-error -interaction=nonstopmode main.tex
 xelatex -halt-on-error -interaction=nonstopmode main.tex
 ```
@@ -64,13 +64,13 @@ xelatex -halt-on-error -interaction=nonstopmode main.tex
 | 想做什么 | 从哪里开始 |
 | --- | --- |
 | 用自己的数据建一个案例 | 在根目录运行 `python -m pipeline_core.python_tools.case_initializer case_demo`，把有权使用的材料放进新案例的 `data/raw/`，再填写题意和配置。 |
-| 求解、验证、成稿或打包 | 用 `python run_case.py --help` 查看参数。各阶段怎样授权、填写回执和提交，可以查 `python -m pipeline_core.python_tools.transition_case --help`。 |
+| 查看运行、复核和打包选项 | 用 `python run_case.py --help` 查看参数。处理自己的案例时，用 `--case-dir` 指向它的目录。各阶段怎样授权、填写回执和提交，可以查 `python -m pipeline_core.python_tools.transition_case --help`。 |
 | 用本地 Codex 辅助建模 | 在本地会话中打开案例。项目约定在 `AGENTS.md`，工具说明和提示词在 `.agents/skills/` 和 `pipeline_core/prompt_templates/stage_prompts.md`。正式建模时先读交接文件里的路线、边界和知识卡，再记下实际用了哪些。 |
 | 请别人挑一挑结论里的问题 | 给独立审稿者或外部 AI 的提示在 `pipeline_core/claim_check/prompts/` 和 `pipeline_core/red_team/`。运行 `python pipeline_core/claim_check/run_claim_check_dryrun.py` 可以看看程序如何用一个合成反例标出疑点，等人判断。 |
 | 看储能问题怎么做预测和调度 | `examples/storage/code/python/` 里有物理约束、预测、分层优化、滚动调度和账本。Q1 从同目录的 `run_pipeline.py` 运行，使用合成数据也需要授权。Q2 到 Q4 的输入要求各不相同。 |
-| 检查正式论文和交付材料 | `pipeline_core/paper_template/` 生成论文，`pipeline_core/paper_quality/` 做检查。用 MATLAB 出图需要本机装有 MATLAB。交付前要自己看过 PDF、核对 AI 使用记录和待交文件，再单独授权。 |
+| 给参赛稿排版、核对交付材料 | 模型假设、推导和结论由队员写明并定稿。`pipeline_core/paper_template/` 读取准备好的章节，按模板排成 TeX。`pipeline_core/paper_quality/` 检查公式、图表和结论能否对应到计算结果。用 MATLAB 出图需要本机装有 MATLAB。交付前由队员审读 PDF、核对 AI 使用记录和待交文件，再确认提交。 |
 
-储能例子的写表脚本在 `examples/storage/code/javascript/`。给 Q3 或 Q4 写表前，要从独立审批记录取得模板的 SHA-256，按所用模板设置 `Q3_TEMPLATE_SHA256`、`Q4_2_TEMPLATE_SHA256` 或 `Q4_3_TEMPLATE_SHA256`。程序核对模板后才会读取年度账本并写表。复核脚本在同级的 `python/` 目录。
+储能例子的写表脚本在 `examples/storage/code/javascript/`。给 Q3 或 Q4 写表前，要从独立审批记录取得模板的 SHA-256，按所用模板设置 `Q3_TEMPLATE_SHA256`、`Q4_2_TEMPLATE_SHA256` 或 `Q4_3_TEMPLATE_SHA256`。程序核对模板后才会读取年度账本并写表。同级 `python/q4_workbook_check.py` 会把表内的计划电量、费用和应急电量与账本值并排列出，方便队员逐项核对。
 
 ## 运行测试
 

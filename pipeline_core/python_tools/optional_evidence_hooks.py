@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from pipeline_core.python_tools.case_paths import parse_case_relative_path, resolve_case_relative_path
 from math_core.comparison.model_tournament import run_model_tournament, write_tournament_report
 from math_core.sensitivity.perturbation_matrix import (
     run_perturbation_matrix,
@@ -56,7 +57,7 @@ def _adapter_state(adapter: Any) -> tuple[str, str]:
     if not isinstance(adapter, str) or not adapter.strip():
         return "missing", ""
     normalized = adapter.strip()
-    if Path(normalized).is_absolute():
+    if parse_case_relative_path(normalized) is None:
         return "unsafe", normalized
     path_text, separator, _function_name = normalized.rpartition(":")
     if not separator:
@@ -64,8 +65,7 @@ def _adapter_state(adapter: Any) -> tuple[str, str]:
     path_text = path_text.strip()
     if not path_text:
         return "missing", normalized
-    candidate = Path(path_text)
-    if candidate.is_absolute() or ".." in candidate.parts:
+    if parse_case_relative_path(path_text) is None:
         return "unsafe", normalized
     return "safe", normalized
 
@@ -77,19 +77,6 @@ def _adapter_parts(adapter: str) -> tuple[str, str] | None:
     return path_text.strip(), function_name.strip()
 
 
-def _case_relative_path(case_dir: Path, value: str) -> Path | None:
-    candidate = Path(value)
-    if candidate.is_absolute() or ".." in candidate.parts:
-        return None
-    root = case_dir.resolve()
-    resolved = (root / candidate).resolve()
-    try:
-        resolved.relative_to(root)
-    except ValueError:
-        return None
-    return resolved
-
-
 def _load_adapter(case_dir: Path, adapter: str) -> tuple[Any | None, str | None]:
     """Load a case-local ``path.py:function`` adapter without package imports."""
 
@@ -97,7 +84,7 @@ def _load_adapter(case_dir: Path, adapter: str) -> tuple[Any | None, str | None]
     if parts is None:
         return None, "adapter must use path/to/file.py:build_config"
     path_text, function_name = parts
-    adapter_path = _case_relative_path(case_dir, path_text)
+    adapter_path = resolve_case_relative_path(case_dir, path_text)
     if adapter_path is None or adapter_path.suffix.lower() != ".py" or not adapter_path.is_file():
         return None, "adapter file is missing or outside case_dir"
 
@@ -166,7 +153,7 @@ def _execute_hook(
 ) -> tuple[list[str] | None, list[str], str | None]:
     """Run one math-core hook and return evidence, manual items, or an error."""
 
-    output_dir = _case_relative_path(output_root, str(view["output_dir"]))
+    output_dir = resolve_case_relative_path(output_root, str(view["output_dir"]))
     if output_dir is None:
         return None, [], "configured output_dir is unsafe"
     build_config, load_error = _load_adapter(case_dir, str(view["adapter"]))
@@ -210,7 +197,7 @@ def _execute_hook(
 
     evidence_files: list[str] = []
     for item in expected_outputs:
-        expected_path = _case_relative_path(output_dir, item)
+        expected_path = resolve_case_relative_path(output_dir, item)
         if expected_path is None or not expected_path.is_file() or expected_path.stat().st_size <= 0:
             return None, report_manual_items, f"EVIDENCE:{item}"
         evidence_files.append(str(expected_path))

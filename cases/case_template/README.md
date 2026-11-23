@@ -4,7 +4,7 @@ This directory is the only approved source for creating new MathModeling2026 cas
 
 ## Initialization Rule
 
-Copy `cases/case_template` to a new `cases/case_xx_name` directory, then update `case_config.json`.
+From the repository root, run `python -m pipeline_core.python_tools.case_initializer case_demo`. The initializer copies this template and sets the case ID in both `case_config.json` and `CURRENT_HANDOFF.md`. Then fill in the new case configuration.
 
 Do not initialize a new case from `case_01_crop_planting`, `case_02_smoke_interference`, or any archived case.
 

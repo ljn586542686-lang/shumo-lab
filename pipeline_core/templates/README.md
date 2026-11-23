@@ -5,10 +5,10 @@
 当前推荐的新赛题初始化方式：
 
 ```powershell
-Copy-Item "cases\case_template" "cases\case_02_new_problem" -Recurse
+python -m pipeline_core.python_tools.case_initializer case_02_new_problem
 ```
 
-复制后必须先填写新 case 的 `case_config.json`，并将赛题和附件放入 `data/raw`。如果缺少赛题或数据，生产线只能进行目录完整性检查，不能生成假模型、假图表或假论文结论。
+初始化命令会同步新案例的编号和交接记录。接着填写新案例的 `case_config.json`，并将赛题和附件放入 `data/raw`。如果缺少赛题或数据，生产线只能进行目录完整性检查，不能生成假模型、假图表或假论文结论。
 
 ## 可复用记录模板
 

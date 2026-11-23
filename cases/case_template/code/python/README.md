@@ -4,7 +4,7 @@ Place case-specific Python scripts here. Shared tools should live in `pipeline_c
 
 ## 图表中文化
 
-Python 建模脚本生成论文图表前，应先调用本目录的 `plot_style.py`：
+用 Python 绘制文稿里的图表前，先调用本目录的 `plot_style.py`。
 
 ```python
 from plot_style import setup_chinese_plot_style

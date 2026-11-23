@@ -612,6 +612,8 @@ class FinalFreezerAuthorizationTests(unittest.TestCase):
     def test_manifest_path_escape_blocks(self) -> None:
         self._make_case_ready_for_intake()
         candidate_dir = self._create_candidate_package(files=(("payload.txt", "payload"),))
+        # POSIX requires the intermediate directory to exist for the fixture's file check.
+        (candidate_dir / "nested").mkdir()
         escaped_path = str(candidate_dir / "nested" / ".." / "manifest.json")
         result = self._check(self._external_candidate_authorization(candidate_dir, candidate_manifest_path=escaped_path))
         self.assertIn("FINAL_AUTH_PACKAGE_MISMATCH", result["blockers"])

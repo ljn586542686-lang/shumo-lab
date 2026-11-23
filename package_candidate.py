@@ -16,6 +16,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from pipeline_core.python_tools.case_paths import resolve_case_relative_path
 from pipeline_core.python_tools.claim_check_preflight import check_claim_check_preflight
 from pipeline_core.python_tools.structured_claim_handoff import (
     StructuredClaimHandoffBlocked,
@@ -546,7 +547,6 @@ def _content_binding_mismatches(case_dir: Path, payload: dict[str, Any], upstrea
         return [{"reason": "missing_or_malformed_content_bindings", "upstream_status_path": upstream_status_path}]
     mismatches: list[dict[str, Any]] = []
     allowed_sha256 = set(string.hexdigits)
-    case_root = case_dir.resolve()
     for index, binding in enumerate(bindings):
         evidence: dict[str, Any] = {"binding_index": index, "upstream_status_path": upstream_status_path}
         if not isinstance(binding, dict):
@@ -566,14 +566,8 @@ def _content_binding_mismatches(case_dir: Path, payload: dict[str, Any], upstrea
             continue
         if not required:
             continue
-        raw_path = Path(relative_path)
-        if raw_path.is_absolute() or ".." in raw_path.parts:
-            mismatches.append({**evidence, "actual_sha256": "unsafe", "reason": "unsafe_path"})
-            continue
-        current_path = (case_dir / raw_path).resolve()
-        try:
-            current_path.relative_to(case_root)
-        except ValueError:
+        current_path = resolve_case_relative_path(case_dir, relative_path)
+        if current_path is None:
             mismatches.append({**evidence, "actual_sha256": "unsafe", "reason": "unsafe_path"})
             continue
         if not current_path.is_file():

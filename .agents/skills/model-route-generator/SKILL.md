@@ -93,7 +93,7 @@ reasoning. `model_route_score.xlsx` is an executor-authored artifact;
 - 不编造数据。
 - 不把未运行模型写成已验证模型。
 - 不绕过人工模型选择。
-- 不直接进入代码生成或论文生成。
+- 本步骤停在路线比较，编码求解和正文撰写留给后续阶段。
 
 ## 人工闸门
 

@@ -1,6 +1,6 @@
 # Gate 3：结果接受确认
 
-本闸门由队员人工勾选。未通过前，不得进入论文正文生成阶段。
+请队员逐项核对并填写决定。通过后，才能将本次结果用于正文撰写和排版。
 
 - [ ] 已生成 `output/result_summary.txt`。
 - [ ] 已生成 `output/result_summary.json`。

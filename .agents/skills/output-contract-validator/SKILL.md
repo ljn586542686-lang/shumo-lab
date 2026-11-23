@@ -1,6 +1,6 @@
 ---
 name: output-contract-validator
-description: 数学建模输出契约验证 skill。用于检查 result_summary.txt、result_summary.json、图表、提交表格和验证报告是否完整一致，输出 output_contract_report.md；适用于论文生成前和最终冻结前，只验证不改结果。
+description: 数学建模输出契约验证 skill。用于检查 result_summary.txt、result_summary.json、图表、提交表格和验证报告是否完整一致，输出 output_contract_report.md；适用于正文撰写前和最终冻结前，只验证不改结果。
 ---
 
 # Output Contract Validator
@@ -37,7 +37,7 @@ description: 数学建模输出契约验证 skill。用于检查 result_summary.
 
 - `pass`：可进入论文证据链阶段。
 - `warning`：可继续，但必须在论文局限性中说明。
-- `fail`：不得进入论文正文生成。
+- `fail`：暂缓正文撰写和排版，先复核缺失或不一致的输出。
 
 ## 禁止事项
 

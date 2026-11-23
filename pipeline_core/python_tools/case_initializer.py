@@ -7,14 +7,30 @@ import json
 import shutil
 from pathlib import Path
 
+if __package__:
+    from .case_paths import parse_case_relative_path, resolve_case_relative_path
+else:  # Also support running this file directly.
+    from case_paths import parse_case_relative_path, resolve_case_relative_path
+
 
 def initialize_case(root: Path, case_id: str) -> Path:
-    template = root / "cases" / "case_template"
-    target = root / "cases" / case_id
-    if not template.exists():
+    cases_dir = root / "cases"
+    template = cases_dir / "case_template"
+    relative = parse_case_relative_path(case_id)
+    if relative is None or not relative.parts:
+        raise ValueError("case_id must name a directory within cases/")
+    resolved = resolve_case_relative_path(cases_dir, case_id)
+    if resolved is None or not cases_dir.resolve().is_relative_to(root.resolve()):
+        raise ValueError("case_id must name a directory within cases/")
+    target = cases_dir / relative
+    if not template.is_dir():
         raise FileNotFoundError("cases/case_template does not exist.")
-    if target.exists():
+    if not template.resolve().is_relative_to(cases_dir.resolve()):
+        raise ValueError("The case template must be inside cases/")
+    if target.exists() or target.is_symlink():
         raise FileExistsError(f"Target case already exists: {target}")
+    if resolved.is_relative_to(template.resolve()):
+        raise ValueError("A new case cannot be created inside cases/case_template")
     shutil.copytree(template, target)
     config_path = target / "case_config.json"
     config = json.loads(config_path.read_text(encoding="utf-8-sig"))

@@ -104,6 +104,19 @@ class TransitionCaseKernelTests(unittest.TestCase):
             completion_receipt_path=receipt_path,
         )
 
+    def test_initializer_requires_a_destination_in_cases_and_outside_the_template(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="case_initializer_") as temp:
+            root = Path(temp)
+            cases = root / "cases"
+            template = cases / "case_template"
+            template.mkdir(parents=True)
+            invalid_ids = ("", ".", "..", str(cases / "unused"), "case_template/draft")
+            with patch("shutil.copytree") as copytree:
+                for case_id in invalid_ids:
+                    with self.subTest(case_id=case_id), self.assertRaises(ValueError):
+                        initialize_case(root, case_id)
+                copytree.assert_not_called()
+
     def test_initializer_enables_single_authority_and_updates_case_identity(self) -> None:
         with tempfile.TemporaryDirectory(prefix="transition_initializer_") as temp:
             root = Path(temp)

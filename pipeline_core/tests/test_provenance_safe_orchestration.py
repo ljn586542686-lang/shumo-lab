@@ -87,6 +87,7 @@ class _IsolatedOrchestrationTestCase(unittest.TestCase):
         import canonical_result_index as canonical_result_index_module
         from pipeline_core.claim_check import enforce_claim_check as enforce_claim_check_module
         from pipeline_core.quality_gates import result_acceptance_contract as result_acceptance_contract_module
+        from pipeline_core.python_tools import case_paths as case_paths_module
         from pipeline_core.python_tools import claim_check_preflight as claim_check_preflight_module
         from pipeline_core.python_tools import competition_model_governance as competition_model_governance_module
         from pipeline_core.python_tools import gate_authority as gate_authority_module
@@ -110,6 +111,7 @@ class _IsolatedOrchestrationTestCase(unittest.TestCase):
 
         repo_root = Path(run_case_module.__file__).resolve().parent
         for module in (
+            case_paths_module,
             claim_check_preflight_module,
             competition_model_governance_module,
             gate_authority_module,
